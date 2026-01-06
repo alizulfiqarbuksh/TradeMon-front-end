@@ -14,7 +14,11 @@ import TradeOfferDetail from './components/TradeOfferDetail/TradeOfferDetail';
 import PokemonDetail from './components/PokemonDetail/PokemonDetail';
 
 import { UserContext } from './contexts/UserContext';
+<<<<<<< HEAD
 import PokemonForm from './components/PokemonForm/PokemonForm';
+=======
+import MyCards from './components/MyCards/MyCards';
+>>>>>>> main
 
 const App = () => {
   // Access the user object from UserContext
@@ -54,9 +58,13 @@ const App = () => {
 
   }, [])
 
+<<<<<<< HEAD
   const updatePokemonList = (pokemon) => {
     setPokemons([...pokemons, pokemon])
   }
+=======
+
+>>>>>>> main
 
   return (
     <>
@@ -71,6 +79,7 @@ const App = () => {
         <Route path='/tradeOffer/:id' element={<TradeOfferDetail />} />
         <Route path='/pokemon/create' element={<PokemonForm user={user} updatePokemonList={updatePokemonList} />} />
         <Route path='/pokemon/:id' element={<PokemonDetail />} />
+        <Route path='/pokemon/mycards' element={<MyCards pokemons={pokemons} user={user}/>} />
       </Routes>
     </>
   );

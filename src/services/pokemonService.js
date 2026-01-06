@@ -4,8 +4,19 @@ const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/pokemon`;
 
 const show = async () => {
   try {
-
     const response = await axios.get(BASE_URL)
+    return response.data.pokemons
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+const myPokemons = async () => {
+  try {
+    const token = localStorage.getItem('token')
+    const response = await axios.get(`${BASE_URL}/my-pokemons`,{headers: {Authorization: `Bearer ${token}`}})
     return response.data.pokemons
     
   } catch (error) {
@@ -51,4 +62,5 @@ export {
   create,
   deleteOne,
   update,
+  myPokemons
 }
