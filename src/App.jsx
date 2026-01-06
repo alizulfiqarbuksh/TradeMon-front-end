@@ -10,6 +10,7 @@ import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import Pokemon from './components/Pokemon/Pokemon';
 import TradeOffer from './components/TradeOffer/TradeOffer';
+import PokemonDetail from './components/PokemonDetail/PokemonDetail';
 
 import { UserContext } from './contexts/UserContext';
 
@@ -61,6 +62,7 @@ const App = () => {
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/pokemon' element={<Pokemon pokemons={pokemons} />} />
         <Route path='/tradeOffer' element={<TradeOffer tradeOffers={tradeOffers} />} />
+        <Route path='/pokemon/:id' element={<PokemonDetail />} />
       </Routes>
     </>
   );
