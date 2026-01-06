@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router';
-import * as pokemonService from './services/pokemon'
+import * as pokemonService from './services/pokemonService'
 
 import NavBar from './components/NavBar/NavBar';
 import SignUpForm from './components/SignUpForm/SignUpForm';
