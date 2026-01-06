@@ -14,6 +14,7 @@ import TradeOfferDetail from './components/TradeOfferDetail/TradeOfferDetail';
 import PokemonDetail from './components/PokemonDetail/PokemonDetail';
 
 import { UserContext } from './contexts/UserContext';
+import PokemonForm from './components/PokemonForm/PokemonForm';
 
 const App = () => {
   // Access the user object from UserContext
@@ -53,6 +54,10 @@ const App = () => {
 
   }, [])
 
+  const updatePokemonList = (pokemon) => {
+    setPokemons([...pokemons, pokemon])
+  }
+
   return (
     <>
       <NavBar/>
@@ -64,7 +69,7 @@ const App = () => {
         <Route path='/pokemon' element={<Pokemon pokemons={pokemons} />} />
         <Route path='/tradeOffer' element={<TradeOffer tradeOffers={tradeOffers} />} />
         <Route path='/tradeOffer/:id' element={<TradeOfferDetail />} />
-
+        <Route path='/pokemon/create' element={<PokemonForm user={user} updatePokemonList={updatePokemonList} />} />
         <Route path='/pokemon/:id' element={<PokemonDetail />} />
       </Routes>
     </>
