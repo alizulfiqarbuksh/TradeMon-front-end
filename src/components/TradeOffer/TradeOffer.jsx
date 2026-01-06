@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import * as pokemonService from '../../services/tradeOffer'
+import * as pokemonService from '../../services/tradeOfferService'
+import { useNavigate } from 'react-router'
 
 function TradeOffer({tradeOffers}) {
 
+    const navigate = useNavigate();
 
   return (
     <div>
@@ -15,6 +17,7 @@ function TradeOffer({tradeOffers}) {
           <h3>Sender Pokemon id: {offer.sender_pokemon_id}</h3>
           <h3>Receiver Pokemon id: {offer.receiver_pokemon_id}</h3>
           <h3>Status: {offer.status}</h3>
+          <button onClick={() => navigate(`/tradeOffer/${offer._id}`)}>View Details</button>
         </div>
       )}
     </div>
