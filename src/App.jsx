@@ -10,6 +10,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import Pokemon from './components/Pokemon/Pokemon';
 
 import { UserContext } from './contexts/UserContext';
+import MyCards from './components/MyCards/MyCards';
 
 const App = () => {
   // Access the user object from UserContext
@@ -36,6 +37,8 @@ const App = () => {
 
   }, [])
 
+
+
   return (
     <>
       <NavBar/>
@@ -45,6 +48,7 @@ const App = () => {
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/pokemon' element={<Pokemon pokemons={pokemons} />} />
+        <Route path='/pokemon/mycards' element={<MyCards pokemons={pokemons} />} />
       </Routes>
     </>
   );

@@ -20,6 +20,7 @@ const NavBar = () => {
         <ul>
           <li>Welcome, {user.username}</li>
           <li><Link to='/'>Dashboard</Link></li>
+          <li><Link to='/pokemon/mycards'>MyCards</Link></li>
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
         </ul>
       ) : (
