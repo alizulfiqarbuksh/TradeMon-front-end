@@ -25,6 +25,8 @@ const App = () => {
 
   const [pokemons, setPokemons] = useState([])
 
+  const [tradeOfferToUpdate, setTradeOfferToUpdate] = useState([])
+
   const [tradeOffers, setTradeOffers] = useState([])
 
   useEffect(() => {
@@ -64,6 +66,24 @@ const App = () => {
     setPokemons([...pokemons, pokemon])
   }
 
+  const findTradeOfferToUpdate = (tradeOfferToUpdateId) => {
+      const foundTradeoffer = tradeOffers.find((tradeOffer) => tradeOffer._id === tradeOfferToUpdateId)
+      setTradeOfferToUpdate(foundTradeoffer)
+  }
+
+  const updateOneTradeOffer = (tradeOfferObj) => {
+      const newTradeOfferList = tradeOffers.map((tradeOffer)=>{
+        if(tradeOffer._id === tradeOfferObj._id) {
+          return tradeOfferObj
+        }
+        else {
+          return tradeOffer
+        }
+      })
+
+      setTradeOffers(newTradeOfferList)
+  }
+
 
 
   return (
@@ -75,13 +95,15 @@ const App = () => {
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/pokemon' element={<Pokemon pokemons={pokemons} />} />
-        <Route path='/tradeOffer' element={<TradeOffer tradeOffers={tradeOffers} />} />
+        <Route path='/tradeOffer' element={<TradeOffer tradeOffers={tradeOffers} findTradeOfferToUpdate={findTradeOfferToUpdate}/>} />
         <Route path='/tradeOffer/:id' element={<TradeOfferDetail />} />
               <Route path='/pokemon/create' element={<PokemonForm user={user} updatePokemonList={updatePokemonList} />} />
         <Route path='/pokemon/:id' element={<PokemonDetail />} />
         <Route path='/tradeOffer/create' element={<TradeOfferForm user={user} updateTradeOfferList={updateTradeOfferList}/>} />
 
         <Route path='/pokemon/mycards' element={<MyCards pokemons={pokemons} user={user}/>} />
+        <Route path='/tradeOffer/:id/update' element={<TradeOfferForm user={user}  tradeOfferToUpdate={tradeOfferToUpdate} updateOneTradeOffer={updateOneTradeOffer}/>} />
+
       </Routes>
     </>
   );
