@@ -24,6 +24,8 @@ const NavBar = () => {
           <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
           <li><Link to='/pokemon'>All pokemons</Link></li>
           <li><Link to='/pokemon/create'>Add a Card</Link></li>
+          <li><Link to='/tradeOffer'>All Trade Offers</Link></li>
+          <li><Link to='/tradeOffer/create'>Add Trade Offers</Link></li>
         </ul>
       ) : (
         <ul>
@@ -32,6 +34,7 @@ const NavBar = () => {
           <li><Link to='/sign-up'>Sign Up</Link></li>
           <li><Link to='/pokemon'>All pokemons</Link></li>
           <li><Link to='/tradeOffer'>All Trade Offers</Link></li>
+          <li><Link to='/tradeOffer/create'>Add Trade Offers</Link></li>
         </ul>
       )}
     </nav>
