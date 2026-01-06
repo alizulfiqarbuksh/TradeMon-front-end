@@ -12,6 +12,7 @@ import Pokemon from './components/Pokemon/Pokemon';
 import TradeOffer from './components/TradeOffer/TradeOffer';
 import TradeOfferDetail from './components/TradeOfferDetail/TradeOfferDetail';
 import PokemonDetail from './components/PokemonDetail/PokemonDetail';
+import TradeOfferForm from './components/TradeOfferForm/TradeOfferForm';
 
 import { UserContext } from './contexts/UserContext';
 
@@ -53,6 +54,10 @@ const App = () => {
 
   }, [])
 
+  const updateTradeOfferList = (tradeOffer) => {
+    setTradeOffers([...tradeOffers, tradeOffer])
+  }
+
   return (
     <>
       <NavBar/>
@@ -64,8 +69,10 @@ const App = () => {
         <Route path='/pokemon' element={<Pokemon pokemons={pokemons} />} />
         <Route path='/tradeOffer' element={<TradeOffer tradeOffers={tradeOffers} />} />
         <Route path='/tradeOffer/:id' element={<TradeOfferDetail />} />
-
+      
         <Route path='/pokemon/:id' element={<PokemonDetail />} />
+        <Route path='/tradeOffer/create' element={<TradeOfferForm user={user} updateTradeOfferList={updateTradeOfferList}/>} />
+
       </Routes>
     </>
   );
