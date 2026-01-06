@@ -1,5 +1,6 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router';
+import * as pokemonService from './services/pokemon'
 
 import NavBar from './components/NavBar/NavBar';
 import SignUpForm from './components/SignUpForm/SignUpForm';
@@ -15,6 +16,26 @@ const App = () => {
   // This gives us the currently logged-in user's information (username, email) that we extract from the token
   const { user } = useContext(UserContext);
 
+  const [pokemons, setPokemons] = useState([])
+
+  useEffect(() => {
+
+    const getPokemons = async () => {
+      try {
+
+        const pokemons = await pokemonService.show()
+        setPokemons(pokemons)
+      
+    }
+     catch (error) {
+      console.log(error)
+    }
+    }
+
+    getPokemons()
+
+  }, [])
+
   return (
     <>
       <NavBar/>
@@ -23,7 +44,7 @@ const App = () => {
         <Route path='/' element={user ? <Dashboard /> : <Landing />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
-        <Route path='/pokemon' element={<Pokemon />} />
+        <Route path='/pokemon' element={<Pokemon pokemons={pokemons} />} />
       </Routes>
     </>
   );
