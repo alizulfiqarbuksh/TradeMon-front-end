@@ -48,7 +48,7 @@ const App = () => {
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/pokemon' element={<Pokemon pokemons={pokemons} />} />
-        <Route path='/pokemon/mycards' element={<MyCards pokemons={pokemons} />} />
+        <Route path='/pokemon/mycards' element={<MyCards pokemons={pokemons} user={user}/>} />
       </Routes>
     </>
   );
