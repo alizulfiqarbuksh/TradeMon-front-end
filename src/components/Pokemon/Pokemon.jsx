@@ -1,27 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import * as pokemonService from '../../services/pokemon'
 
-function Pokemon() {
+function Pokemon({pokemons}) {
 
-  const [pokemons, setPokemons] = useState([])
-
-  useEffect(() => {
-
-    const getPokemons = async () => {
-      try {
-
-        const pokemons = await pokemonService.show()
-        setPokemons(pokemons)
-      
-    }
-     catch (error) {
-      console.log(error)
-    }
-    }
-
-    getPokemons()
-
-  }, [])
 
   return (
     <div>
