@@ -14,11 +14,8 @@ import TradeOfferDetail from './components/TradeOfferDetail/TradeOfferDetail';
 import PokemonDetail from './components/PokemonDetail/PokemonDetail';
 
 import { UserContext } from './contexts/UserContext';
-<<<<<<< HEAD
-import PokemonForm from './components/PokemonForm/PokemonForm';
-=======
 import MyCards from './components/MyCards/MyCards';
->>>>>>> main
+import PokemonForm from './components/PokemonForm/PokemonForm';
 
 const App = () => {
   // Access the user object from UserContext
@@ -58,13 +55,11 @@ const App = () => {
 
   }, [])
 
-<<<<<<< HEAD
   const updatePokemonList = (pokemon) => {
     setPokemons([...pokemons, pokemon])
   }
-=======
 
->>>>>>> main
+
 
   return (
     <>
