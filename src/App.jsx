@@ -14,6 +14,7 @@ import TradeOfferDetail from './components/TradeOfferDetail/TradeOfferDetail';
 import PokemonDetail from './components/PokemonDetail/PokemonDetail';
 
 import { UserContext } from './contexts/UserContext';
+import MyCards from './components/MyCards/MyCards';
 
 const App = () => {
   // Access the user object from UserContext
@@ -53,6 +54,8 @@ const App = () => {
 
   }, [])
 
+
+
   return (
     <>
       <NavBar/>
@@ -66,6 +69,7 @@ const App = () => {
         <Route path='/tradeOffer/:id' element={<TradeOfferDetail />} />
 
         <Route path='/pokemon/:id' element={<PokemonDetail />} />
+        <Route path='/pokemon/mycards' element={<MyCards pokemons={pokemons} user={user}/>} />
       </Routes>
     </>
   );
