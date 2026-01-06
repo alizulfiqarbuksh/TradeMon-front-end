@@ -56,19 +56,16 @@ const App = () => {
 
   }, [])
 
-<<<<<<< HEAD
   const updateTradeOfferList = (tradeOffer) => {
     setTradeOffers([...tradeOffers, tradeOffer])
   }
 
-=======
   const updatePokemonList = (pokemon) => {
     setPokemons([...pokemons, pokemon])
   }
 
 
 
->>>>>>> main
   return (
     <>
       <NavBar/>
@@ -80,16 +77,11 @@ const App = () => {
         <Route path='/pokemon' element={<Pokemon pokemons={pokemons} />} />
         <Route path='/tradeOffer' element={<TradeOffer tradeOffers={tradeOffers} />} />
         <Route path='/tradeOffer/:id' element={<TradeOfferDetail />} />
-<<<<<<< HEAD
-      
+              <Route path='/pokemon/create' element={<PokemonForm user={user} updatePokemonList={updatePokemonList} />} />
         <Route path='/pokemon/:id' element={<PokemonDetail />} />
         <Route path='/tradeOffer/create' element={<TradeOfferForm user={user} updateTradeOfferList={updateTradeOfferList}/>} />
 
-=======
-        <Route path='/pokemon/create' element={<PokemonForm user={user} updatePokemonList={updatePokemonList} />} />
-        <Route path='/pokemon/:id' element={<PokemonDetail />} />
         <Route path='/pokemon/mycards' element={<MyCards pokemons={pokemons} user={user}/>} />
->>>>>>> main
       </Routes>
     </>
   );
