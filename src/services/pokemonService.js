@@ -1,0 +1,54 @@
+import axios from 'axios';
+
+const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/pokemon`;
+
+const show = async () => {
+  try {
+
+    const response = await axios.get(BASE_URL)
+    return response.data.pokemons
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const details = async (id) => {
+  try {
+
+    const response = await axios.get(`${BASE_URL}/${id}`)
+    return response.data.pokemon
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const create = async (pokemon) => {
+  try {
+
+    const response = await axios.post(BASE_URL, pokemon)
+    return response.data.pokemon
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const deleteOne = async (id) => {
+  const response = await axios.delete(`${BASE_URL}/${id}`)
+  return response.data.pokemon
+}
+
+const update = async (id, pokemon) => {
+  const response = await axios.put(`${BASE_URL}/${id}`, pokemon)
+  return response.data.pokemon
+}
+
+export {
+  show,
+  details,
+  create,
+  deleteOne,
+  update,
+}
