@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import * as pokemonService from '../../services/pokemonService'
+import TestImageUpload from '../TestImageUpload/TestImageUpload';
 
 function PokemonForm({user, updatePokemonList, pokemonToUpdate, updateOnePokemon}) {
 
@@ -12,6 +13,7 @@ function PokemonForm({user, updatePokemonList, pokemonToUpdate, updateOnePokemon
             level: 0,
             shiny: false,
             owner: "",
+            image: "",
   })
 
   const navigate = useNavigate()
@@ -26,7 +28,7 @@ function PokemonForm({user, updatePokemonList, pokemonToUpdate, updateOnePokemon
 
       try {
 
-        const updatedPokemon = await pokemonService.update(pokemonToUpdate._id, formData)
+        const updatedPokemon = await pokemonService.update(pokemonToUpdate._id, payload)
 
         if (updatedPokemon) {
           updateOnePokemon(updatedPokemon)
@@ -83,10 +85,14 @@ function PokemonForm({user, updatePokemonList, pokemonToUpdate, updateOnePokemon
 
         <label htmlFor="shiny">Shiny: </label>
         <input type="checkbox" name="shiny" id="shiny" onChange={handleChange} checked={formData.shiny} />
+
+        <TestImageUpload onUpload={(url) => setFormData((formData) => ({ ...formData, image: url }))} />
         
         <button type="submit">Submit</button>
 
       </form>
+
+      {formData.image && ( <img src={formData.image} alt="Preview" style={{ width: "200px", marginTop: "10px" }} /> )}
 
     </div>
   )
