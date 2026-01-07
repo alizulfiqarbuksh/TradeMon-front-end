@@ -32,9 +32,10 @@ const handleDelete = async (id)=>{
   const deletedPokemon = await pokemonService.deleteOne(id)
 
   if(deletedPokemon) {
-  deletePokemon()
-  Navigate('/pokemon/mycards')
-}else{
+   setMyPokemon((prevPoke)=>prevPoke.filter((pokemon)=> pokemon._id !== id)) 
+  deletePokemon(id)
+  navigate('/pokemon/mycards')
+}else{0
   console.log('somtheing went wrong')
 }
   

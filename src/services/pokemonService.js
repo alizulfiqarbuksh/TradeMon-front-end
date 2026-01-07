@@ -47,13 +47,24 @@ const create = async (pokemon) => {
 }
 
 const deleteOne = async (id) => {
-  const response = await axios.delete(`${BASE_URL}/${id}`)
+  try{
+  const token = localStorage.getItem('token')
+  const response = await axios.delete(`${BASE_URL}/${id}`,{headers: {Authorization: `Bearer ${token}`}})
   return response.data.pokemon
+} catch(error){
+   console.log(error)
+}
+  
 }
 
 const update = async (id, pokemon) => {
+  try{
   const response = await axios.put(`${BASE_URL}/${id}`, pokemon)
   return response.data.pokemon
+}catch(error){
+  console.log(error)
+}
+  
 }
 
 export {
