@@ -3,7 +3,7 @@ import axios from 'axios'
 import * as pokemonService from '../../services/pokemonService'
 import { useNavigate } from 'react-router'
 
-const MyCards =  ({user, findPokemonToUpdate}) => {
+const MyCards =  ({user, findPokemonToUpdate, deletePokemon}) => {
     const [myPokemon, setMyPokemon] = useState([])
  
     if (!user?._id) return <p>Please sign in to view your cards</p>;
@@ -26,6 +26,20 @@ useEffect(() => {
 
     getPokemons()
 },[user])
+
+const handleDelete = async (id)=>{
+ 
+  const deletedPokemon = await pokemonService.deleteOne(id)
+
+  if(deletedPokemon) {
+  deletePokemon()
+  Navigate('/pokemon/mycards')
+}else{
+  console.log('somtheing went wrong')
+}
+  
+}
+
   return (
     
     <div>
@@ -42,6 +56,9 @@ useEffect(() => {
         <h3>Name: {pokemon.name}</h3>
 
         <p>Type: {pokemon.type}</p>
+      
+
+      <button onClick={()=>handleDelete(pokemon._id)}>Delete</button>
 
         <button onClick={() => {
           findPokemonToUpdate(pokemon._id)

@@ -105,6 +105,18 @@ const App = () => {
 
 
 
+
+
+
+
+const deletePokemon = (id) => {
+
+  const newPokemonList = pokemons.filter(pokemon => pokemon._id !== id)
+
+  setPokemons(newPokemonList)
+}
+
+
   return (
     <>
       <NavBar/>
@@ -120,7 +132,7 @@ const App = () => {
         <Route path='/pokemon/:id' element={<PokemonDetail />} />
         <Route path='/tradeOffer/create' element={<TradeOfferForm user={user} updateTradeOfferList={updateTradeOfferList}/>} />
         <Route path='/pokemone/:id/update' element={<PokemonForm user={user} pokemonToUpdate={pokemonToUpdate} updateOnePokemon={updateOnePokemon} />} />
-        <Route path='/pokemon/mycards' element={<MyCards pokemons={pokemons} user={user}  findPokemonToUpdate={findPokemonToUpdate} />} />
+        <Route path='/pokemon/mycards' element={<MyCards pokemons={pokemons} user={user} deletePokemon={deletePokemon}  findPokemonToUpdate={findPokemonToUpdate} />} />
         <Route path='/tradeOffer/:id/update' element={<TradeOfferForm user={user}  tradeOfferToUpdate={tradeOfferToUpdate} updateOneTradeOffer={updateOneTradeOffer}/>} />
 
       </Routes>
