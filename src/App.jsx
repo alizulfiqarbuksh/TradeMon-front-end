@@ -103,12 +103,6 @@ const App = () => {
       setTradeOffers(newTradeOfferList)
   }
 
-
-
-
-
-
-
 const deletePokemon = (id) => {
 
   const newPokemonList = pokemons.filter(pokemon => pokemon._id !== id)
@@ -128,9 +122,9 @@ const deletePokemon = (id) => {
         <Route path='/pokemon' element={<Pokemon pokemons={pokemons} />} />
         <Route path='/tradeOffer' element={<TradeOffer tradeOffers={tradeOffers} findTradeOfferToUpdate={findTradeOfferToUpdate}/>} />
         <Route path='/tradeOffer/:id' element={<TradeOfferDetail />} />
-              <Route path='/pokemon/create' element={<PokemonForm user={user} updatePokemonList={updatePokemonList} />} />
+        <Route path='/pokemon/create' element={<PokemonForm user={user} updatePokemonList={updatePokemonList} />} />
         <Route path='/pokemon/:id' element={<PokemonDetail />} />
-        <Route path='/tradeOffer/create' element={<TradeOfferForm user={user} updateTradeOfferList={updateTradeOfferList}/>} />
+        <Route path='/tradeOffer/:id/create' element={<TradeOfferForm user={user} updateTradeOfferList={updateTradeOfferList}/>} />
         <Route path='/pokemone/:id/update' element={<PokemonForm user={user} pokemonToUpdate={pokemonToUpdate} updateOnePokemon={updateOnePokemon} />} />
         <Route path='/pokemon/mycards' element={<MyCards pokemons={pokemons} user={user} deletePokemon={deletePokemon}  findPokemonToUpdate={findPokemonToUpdate} />} />
         <Route path='/tradeOffer/:id/update' element={<TradeOfferForm user={user}  tradeOfferToUpdate={tradeOfferToUpdate} updateOneTradeOffer={updateOneTradeOffer}/>} />
