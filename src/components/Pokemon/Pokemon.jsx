@@ -12,6 +12,7 @@ function Pokemon({pokemons}) {
 
       {pokemons.map((pokemon) => 
         <div key={pokemon._id}>
+          <div>{pokemon.image && ( <img src={pokemon.image} alt="Preview" style={{ width: "200px", marginTop: "10px" }} /> )}</div>
           <h3>Name: {pokemon.name}</h3>
           <p>Name: {pokemon.name}</p>
           <button onClick={() => navigate(`/pokemon/${pokemon._id}`)} >Details</button>
