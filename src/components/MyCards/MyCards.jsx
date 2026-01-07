@@ -1,14 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import * as pokemonService from '../../services/pokemonService'
+<<<<<<< HEAD
 import { Navigate } from 'react-router'
 
 const MyCards =  ({user, deletePokemon}) => {
+=======
+import { useNavigate } from 'react-router'
+
+const MyCards =  ({user, findPokemonToUpdate}) => {
+>>>>>>> main
     const [myPokemon, setMyPokemon] = useState([])
  
     if (!user?._id) return <p>Please sign in to view your cards</p>;
 
-
+  const navigate = useNavigate()
 
 useEffect(() => {
 
@@ -56,9 +62,18 @@ const handleDelete = async (id)=>{
         <h3>Name: {pokemon.name}</h3>
 
         <p>Type: {pokemon.type}</p>
+<<<<<<< HEAD
       
 
       <button onClick={()=>handleDelete(pokemon._id)}>Delete</button>
+=======
+
+        <button onClick={() => {
+          findPokemonToUpdate(pokemon._id)
+          navigate(`/pokemone/${pokemon._id}/update`)
+        }
+          } >Update</button>
+>>>>>>> main
             
         </div> )
         

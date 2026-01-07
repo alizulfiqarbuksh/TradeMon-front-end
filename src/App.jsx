@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { use, useContext, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router';
 import * as tradeOfferService from './services/tradeOfferService';
 import * as pokemonService from './services/pokemonService'
@@ -24,6 +24,8 @@ const App = () => {
   const { user } = useContext(UserContext);
 
   const [pokemons, setPokemons] = useState([])
+
+  const [pokemonToUpdate, setPokemonToUpdate] = useState(null)
 
   const [tradeOffers, setTradeOffers] = useState([])
 
@@ -64,6 +66,23 @@ const App = () => {
     setPokemons([...pokemons, pokemon])
   }
 
+  const findPokemonToUpdate = (pokemonToUpdateId) => {
+    const foundPokemon = pokemons.find((pokemon) => pokemon._id === pokemonToUpdateId )
+    setPokemonToUpdate(foundPokemon)
+  }
+
+  const updateOnePokemon = (pokemonObj) => {
+    const newPokemonList = pokemons.map((pokemon) => {
+      if (pokemon._id === pokemonObj._id) {
+        return pokemonObj
+      }
+      else {
+        return pokemon
+      }
+    })
+    setPokemons(newPokemonList)
+  }
+
 
 
 
@@ -92,8 +111,8 @@ const deletePokemon = (id) => {
               <Route path='/pokemon/create' element={<PokemonForm user={user} updatePokemonList={updatePokemonList} />} />
         <Route path='/pokemon/:id' element={<PokemonDetail />} />
         <Route path='/tradeOffer/create' element={<TradeOfferForm user={user} updateTradeOfferList={updateTradeOfferList}/>} />
-
-        <Route path='/pokemon/mycards' element={<MyCards pokemons={pokemons} user={user} deletePokemon={deletePokemon}/>} />
+        <Route path='/pokemone/:id/update' element={<PokemonForm user={user} pokemonToUpdate={pokemonToUpdate} updateOnePokemon={updateOnePokemon} />} />
+        <Route path='/pokemon/mycards' element={<MyCards pokemons={pokemons} user={user} deletePokemon={deletePokemon}  findPokemonToUpdate={findPokemonToUpdate} />} />
       </Routes>
     </>
   );
