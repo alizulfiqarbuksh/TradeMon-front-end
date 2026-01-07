@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import * as pokemonService from '../../services/pokemonService'
 
-function PokemonForm({user, updatePokemonList}) {
+function PokemonForm({user, updatePokemonList, pokemonToUpdate, updateOnePokemon}) {
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState( pokemonToUpdate ? pokemonToUpdate
+    :
+    {
             name: "",
             type: "",
             level: 0,
@@ -20,19 +22,40 @@ function PokemonForm({user, updatePokemonList}) {
     const payload = {...formData, owner: user._id}
     console.log(payload)
 
-    try {
+    if (pokemonToUpdate) {
 
-      const pokemon = await pokemonService.create(payload)
+      try {
 
-      if (pokemon) {
-        updatePokemonList(pokemon)
-        navigate('/pokemon')
-      } else {
-        console.log("something went wrong")
+        const updatedPokemon = await pokemonService.update(pokemonToUpdate._id, formData)
+
+        if (updatedPokemon) {
+          updateOnePokemon(updatedPokemon)
+          navigate('/pokemon/mycards')
+        }
+        else {
+          console.log("something went wrong")
+        }
+        
+      } catch (error) {
+        console.log(error)
       }
-      
-    } catch (error) {
-      console.log(error)
+
+    }
+    else {
+        try {
+
+        const pokemon = await pokemonService.create(payload)
+
+        if (pokemon) {
+          updatePokemonList(pokemon)
+          navigate('/pokemon')
+        } else {
+          console.log("something went wrong")
+        }
+        
+      } catch (error) {
+        console.log(error)
+      }
     }
 
   }
