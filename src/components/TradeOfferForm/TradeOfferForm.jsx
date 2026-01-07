@@ -3,9 +3,11 @@ import { useState } from 'react'
 import * as tradeOfferService from '../../services/tradeOfferService'
 import { useNavigate } from 'react-router'
 
-function TradeOfferForm({user, updateTradeOfferList}) {
+function TradeOfferForm({user, updateTradeOfferList, tradeOfferToUpdate, updateOneTradeOffer}) {
 
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState( tradeOfferToUpdate ? tradeOfferToUpdate
+        :
+        {
             sender_id: "",
             receiver_id: "",
             sender_pokemon_id: "",
@@ -19,7 +21,23 @@ function TradeOfferForm({user, updateTradeOfferList}) {
     const handleSubmit = async (event) => {
         event.preventDefault()
 
-        try {
+        if(tradeOfferToUpdate){
+            try {
+                const updatedTradeOffer = await tradeOfferService.update(formData, tradeOfferToUpdate._id)
+
+                if(updatedTradeOffer) {
+                    updateOneTradeOffer(updatedTradeOffer)
+                    navigate('/tradeOffer')
+                }
+                else {
+                    console.log('Something went wrong')
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        else {
+            try {
             const tradeOffer = await tradeOfferService.create(formData)
 
             if(tradeOffer){
@@ -31,6 +49,7 @@ function TradeOfferForm({user, updateTradeOfferList}) {
             }
         } catch (error) {
             console.log(error)
+        }
         }
     }
 

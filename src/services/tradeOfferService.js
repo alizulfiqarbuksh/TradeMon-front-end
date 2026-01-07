@@ -29,7 +29,8 @@ const deleteOne = async(id) => {
 
 const update = async(tradeOffer, id) => {
     const response = await axios.put(`${BASE_URL}/${id}`, tradeOffer)
-    return response.data.tradeOffer
+    console.log(response)
+    return response.data.trade
 }
 
 export {
