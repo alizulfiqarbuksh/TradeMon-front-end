@@ -58,8 +58,13 @@ const deleteOne = async (id) => {
 }
 
 const update = async (id, pokemon) => {
+  try{
   const response = await axios.put(`${BASE_URL}/${id}`, pokemon)
   return response.data.pokemon
+}catch(error){
+  console.log(error)
+}
+  
 }
 
 export {
