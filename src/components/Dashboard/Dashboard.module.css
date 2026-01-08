@@ -1,8 +1,9 @@
 .page {
   height: 88vh; /* EXACT navbar height */
   width: 100%;
-  background-color: #0a0a0a;
+  background-color: #1a4d8c; /* Deep Pokémon card blue background */
   overflow: hidden; /* PREVENT vertical scroll */
+  font-family: "Open Sans", sans-serif;
 }
 
 .main {
@@ -17,6 +18,7 @@
   background-image: url("/img/dashboard-bg.png"); /* your image */
   background-size: cover;
   background-position: center;
+  filter: brightness(0.7) saturate(1.1); /* Enhance to match theme */
 }
 
 /* RIGHT CONTENT */
@@ -28,27 +30,35 @@
   flex-direction: column;
   justify-content: center;
 
-  background-color: rgba(5, 15, 40, 0.75);
-  color: white;
+  background: linear-gradient(135deg, rgba(248, 243, 224, 0.95) 0%, rgba(255, 249, 230, 0.95) 100%); /* Parchment/card background with transparency */
+  backdrop-filter: blur(5px);
+  color: #2c3e50; /* Deep blue-grey text */
+  border-left: 3px solid #d4af37; /* Gold border like rare card edges */
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Title */
 .title {
   font-size: 2.5rem;
-  color: #00bfff;
+  color: #c62828; /* Rich red like Pokémon card titles */
   margin-bottom: 20px;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
 }
 
 /* Text */
 .text {
   font-size: 1.15rem;
   line-height: 1.7;
-  color: #e0e0e0;
+  color: #5d4037; /* Brownish-grey like card text */
   margin-bottom: 20px;
 }
 
 .message {
   margin-top: 20px;
   font-weight: bold;
-  color: #00bfff;
+  color: #388e3c; /* Grass/Pokémon green for messages */
+  padding: 10px 15px;
+  background-color: rgba(56, 142, 60, 0.1);
+  border-radius: 6px;
+  border-left: 3px solid #388e3c;
 }
