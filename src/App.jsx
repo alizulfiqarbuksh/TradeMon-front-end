@@ -57,7 +57,11 @@ const App = () => {
       }
     }
 
-    
+        if(!user?._id){
+      setTradeOffers([])
+      return
+    }
+ 
     getTradeOffers()
 
   }, [])
