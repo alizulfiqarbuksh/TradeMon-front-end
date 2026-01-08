@@ -1,12 +1,14 @@
 /* Page wrapper */
 .page {
   min-height: 100vh;
-  background-color: #0a0a0a;
+  background-color: #1a4d8c; /* Deep Pokémon card blue background */
+  background-image: linear-gradient(135deg, #1a4d8c 0%, #0d3b66 100%); /* Blue gradient */
 
   display: flex;
   justify-content: center;
 
   padding: 40px 20px;
+  font-family: "Open Sans", sans-serif;
 }
 
 /* Cards container */
@@ -21,21 +23,29 @@
 .card {
   width: 260px;
   height: 420px;
-  background-color: rgba(5, 15, 40, 0.85);
-  border: 1px solid rgba(0, 191, 255, 0.35);
+  background: linear-gradient(135deg, #f8f3e0 0%, #fff9e6 100%); /* Parchment/card background */
+  border: 3px solid #d4af37; /* Gold border like rare card edges */
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   display: flex;
   flex-direction: column;
-  color: #ffffff;
+  color: #2c3e50; /* Deep blue-grey text */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
 }
 
 /* Image wrapper */
 .imageWrapper {
   width: 100%;
   height: 200px;
-  background-color: #020b1f;
+  background-color: rgba(56, 142, 60, 0.1); /* Subtle green background */
+  border-bottom: 2px solid #d4af37; /* Gold separator */
 
   display: flex;
   align-items: center;
@@ -47,6 +57,7 @@
   max-width: 100%;
   max-height: 100%;
   object-fit: cover;
+  border-radius: 4px;
 }
 
 /* Content */
@@ -59,23 +70,29 @@
 
 /* Title */
 .title {
-  color: #00bfff;
+  color: white; /* Rich red like Pokémon card titles */
   margin-bottom: 30px;
   text-align: center;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+  font-size: 1.8rem;
 }
 
 /* Name */
 .name {
   font-size: 1.2rem;
-  color: #00bfff;
+  color: #1a4d8c; /* Deep blue for card names */
   margin-bottom: 8px;
+  font-weight: 600;
+  border-bottom: 1px solid #d4af37; /* Gold underline */
+  padding-bottom: 4px;
 }
 
 /* Text */
 .text {
   font-size: 0.95rem;
-  color: #e0e0e0;
+  color: #5d4037; /* Brownish-grey like card text */
   margin-bottom: 12px;
+  line-height: 1.5;
 }
 
 /* Actions */
@@ -89,20 +106,38 @@
 .button {
   flex: 1;
   padding: 10px;
-  background: #00bfff;
-  color: #000;
+  background: linear-gradient(to bottom, #c62828 0%, #b71c1c 100%); /* Pokémon red gradient */
+  color: #ffffff;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.3s ease;
-}
-
-.button.delete {
-  background: #ff4d4d;
-  color: #fff;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 0 #7f0000;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .button:hover {
-  opacity: 0.85;
+  background: linear-gradient(to bottom, #d32f2f 0%, #c62828 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #7f0000;
+}
+
+.button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 0 #7f0000;
+}
+
+.button.delete {
+  background: linear-gradient(to bottom, #1a4d8c 0%, #0d3b66 100%); /* Deep blue gradient for delete */
+  box-shadow: 0 4px 0 #0a2a4d;
+}
+
+.button.delete:hover {
+  background: linear-gradient(to bottom, #2a5d9c 0%, #1a4d8c 100%);
+  box-shadow: 0 6px 0 #0a2a4d;
+}
+
+.button.delete:active {
+  box-shadow: 0 2px 0 #0a2a4d;
 }

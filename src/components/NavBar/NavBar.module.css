@@ -1,11 +1,14 @@
 .nav {
   /* width: 100vw; */
-  background-color: rgba(5, 15, 40, 0.9);
+  background-color: #1a4d8c; /* Deep Pokémon card blue background */
   padding: 15px 30px;
+  border-bottom: 3px solid #d4af37; /* Gold border like rare card edges */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 
   display: flex;
   justify-content: center; /* center the nav links */
   align-items: center;
+  font-family: "Open Sans", sans-serif;
 }
 
 .list {
@@ -15,17 +18,34 @@
   align-items: center;
 }
 
-
 .item {
-  color: grey;
+  color: #f8f3e0; /* Parchment color for nav items */
   font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+.item:hover {
+  background-color: rgba(212, 175, 55, 0.1); /* Subtle gold background on hover */
 }
 
 .link {
-  color: grey;
+  color: #f8f3e0; /* Parchment color for links */
   text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .link:hover {
-  color: #00bfff;
+  color: #d4af37; /* Gold hover color */
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+}
+
+/* Optional: Add active state styling */
+.link.active {
+  color: #c62828; /* Pokémon red for active link */
+  border-bottom: 2px solid #c62828;
+  padding-bottom: 2px;
 }
