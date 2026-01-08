@@ -123,8 +123,9 @@ function PokemonForm({ user, updatePokemonList, updateOnePokemon, pokemonToUpdat
           />
 
           <button type="submit" className={styles.button}>
-            {pokemonToUpdate ? 'Update Card' : 'Create Card'}
-          </button>
+  {isEdit ? 'Update Card' : 'Create Card'}
+</button>
+
 
         </form>
 
