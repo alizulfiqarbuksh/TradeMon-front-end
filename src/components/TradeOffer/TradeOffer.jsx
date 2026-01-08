@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import * as tradeOfferService from '../../services/tradeOfferService'
 import { useNavigate } from 'react-router'
 
-function TradeOffer({findTradeOfferToUpdate}) {
+function TradeOffer({findTradeOfferToUpdate, user}) {
 
     const navigate = useNavigate();
 
@@ -20,6 +20,8 @@ function TradeOffer({findTradeOfferToUpdate}) {
     fetchTrades();
   }, []);
 
+  if (!user?._id) return <h1>Loading...</h1>
+
   const handleRespond = async (id, action) => {
     const updatedTrade = await tradeOfferService.respond(id, action);
 
@@ -29,9 +31,8 @@ function TradeOffer({findTradeOfferToUpdate}) {
       )
     );
   };
-
+ 
   
-
   return (
     <div>
       <h1>All Trade Offers</h1>
@@ -52,11 +53,10 @@ function TradeOffer({findTradeOfferToUpdate}) {
                 findTradeOfferToUpdate(offer._id);
                 navigate(`/tradeOffer/${offer._id}/update`);
               }}
-            >
+              >
               Update
             </button>
-
-            {offer.status === 'pending' && (
+            {offer.status === 'pending' && offer.receiver_id === user._id && (
             <>
               <button onClick={() => handleRespond(offer._id, 'accepted')}>
                 Accept
