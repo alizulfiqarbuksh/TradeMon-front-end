@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #0a0a0a;
+  background-color: #1a4d8c; /* Deep Pokémon card blue background */
   z-index: 0;
 }
 
@@ -19,7 +19,7 @@
   background-image: url("/img/image1.png");
   background-size: cover;
   background-position: center;
-  filter: brightness(0.6);
+  filter: brightness(0.6) saturate(1.2);
   z-index: -1;
 }
 
@@ -29,10 +29,11 @@
   padding: 30px;
   border-radius: 10px;
   text-align: center;
-  background: rgba(5, 15, 40, 0.75);
+  background: linear-gradient(135deg, #f8f3e0 0%, #fff9e6 100%); /* Parchment/card background */
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
+  border: 3px solid #d4af37; /* Gold border like rare card edges */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  color: #2c3e50; /* Deep blue-grey text */
   position: relative;
   z-index: 1;
 }
@@ -40,6 +41,8 @@
 .signinWrapper h2 {
   font-size: 2rem;
   margin-bottom: 25px;
+  color: #c62828; /* Rich red like Pokémon card titles */
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
 }
 
 .signinForm {
@@ -49,7 +52,7 @@
 
 .signinInputField {
   position: relative;
-  border-bottom: 2px solid #00bfff;
+  border-bottom: 2px solid #388e3c; /* Grass/Pokémon green accent */
   margin: 20px 0;
 }
 
@@ -58,9 +61,10 @@
   top: 50%;
   left: 0;
   transform: translateY(-50%);
-  color: #ccc;
+  color: #5d4037; /* Brownish-grey like card text */
   pointer-events: none;
   transition: 0.2s ease;
+  font-size: 16px; /* Match input font size */
 }
 
 .signinInputField input {
@@ -69,65 +73,84 @@
   background: transparent;
   border: none;
   outline: none;
-  color: #fff;
+  color: #2c3e50;
   font-size: 16px;
 }
 
-.signinInputField input:focus ~ label,
-.signinInputField input:valid ~ label {
+/* ONLY move label up when input is focused (not when it has value) */
+.signinInputField input:focus ~ label {
   top: -5px;
   font-size: 0.8rem;
-  color: #00bfff;
+  color: #c62828; /* Pokémon red highlight */
+}
+
+/* Keep label in place when input has value */
+.signinInputField input:not(:placeholder-shown) ~ label {
+  top: -5px;
+  font-size: 0.8rem;
+  color: #5d4037; /* Keep original color, not red */
 }
 
 /* Autofill fixes */
 .signinInputField input:-webkit-autofill {
-  -webkit-text-fill-color: #fff !important;
+  -webkit-text-fill-color: #2c3e50 !important;
   transition: background-color 5000s ease-in-out 0s;
 }
 
 .signinInputField input:-webkit-autofill ~ label {
   top: -5px;
   font-size: 0.8rem;
-  color: #ccc;
+  color: #5d4037;
 }
 
 /* Buttons */
 .signinButton {
   padding: 12px;
-  background: #00bfff;
-  color: #000;
+  background: linear-gradient(to bottom, #c62828 0%, #b71c1c 100%); /* Pokémon red gradient */
+  color: #ffffff;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: all 0.3s ease;
   margin-top: 10px;
+  box-shadow: 0 4px 0 #7f0000;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .signinButton:hover {
-  background: #009acd;
-  color: #fff;
+  background: linear-gradient(to bottom, #d32f2f 0%, #c62828 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #7f0000;
+}
+
+.signinButton:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 0 #7f0000;
 }
 
 /* Register link */
 .signinRegister {
   margin-top: 25px;
   font-size: 0.9rem;
+  color: #5d4037;
 }
 
 .signinRegister a {
-  color: #00bfff;
+  color: #1a4d8c; /* Deep blue link color */
   text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
 }
 
 .signinRegister a:hover {
-  text-decoration: underline;
+  color: #d4af37; /* Gold hover color */
+  text-decoration: none;
 }
 
 /* Error message */
 .signinMessage {
-  color: #ff6b6b;
   margin-bottom: 10px;
+  min-height: 20px;
 }
