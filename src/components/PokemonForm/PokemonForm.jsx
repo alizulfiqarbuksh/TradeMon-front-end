@@ -27,12 +27,45 @@ function PokemonForm({ user, updatePokemonList, updateOnePokemon }) {
 
     const fetchPokemon = async () => {
       try {
+<<<<<<< HEAD
         const pokemon = await pokemonService.details(id)
         setFormData(pokemon)
         setLoading(false)
       } catch (err) {
         console.log(err)
         navigate('/pokemon/mycards', { replace: true })
+=======
+
+        const updatedPokemon = await pokemonService.update(pokemonToUpdate._id, payload)
+
+        if (updatedPokemon) {
+          updateOnePokemon(updatedPokemon)
+          navigate('/pokemon/mycards')
+        }
+        else {
+          console.log("something went wrong")
+        }
+        
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
+    else {
+        try {
+
+        const pokemon = await pokemonService.create(payload)
+
+        if (pokemon) {
+          updatePokemonList(pokemon)
+          navigate('/pokemon/mycards')
+        } else {
+          console.log("something went wrong")
+        }
+        
+      } catch (error) {
+        console.log(error)
+>>>>>>> main
       }
     }
 
