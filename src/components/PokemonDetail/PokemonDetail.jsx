@@ -3,6 +3,8 @@ import { useParams } from 'react-router'
 import * as pokemonService from '../../services/pokemonService'
 import { useNavigate } from 'react-router'
 
+import styles from './PokemonDetail.module.css'
+
 function PokemonDetail({user}) {
 
   const [pokemon, setPokemon] = useState(null)
@@ -37,16 +39,42 @@ function PokemonDetail({user}) {
   
    
   return (
-    <div>
-      <h1>Card Details</h1>
-      
-      <h3>Name: {pokemon.name}</h3>
-      <p>Type: {pokemon.type}</p>
-      <p>Level: {pokemon.level}</p>
-      {pokemon.shiny ? <p>Shiny: Yes</p> : <p>Shiny: No</p>}
-      <p>Owner: {pokemon.owner?.username}</p>
-      {!isOwner ? (<button onClick={() => {navigate(`/tradeOffer/${pokemon._id}/create`)}}>Trade</button>) : (<p>You own this Card</p>)   }
-      
+    <div className={styles.pageWrapper}>
+      <div className={styles.cardContainer}>
+        
+        {/* TITLE */}
+        <h1 className={styles.title}>{pokemon.name}</h1>
+
+        {/* IMAGE */}
+        {pokemon.image && (
+          <div className={styles.imageWrapper}>
+            <img src={pokemon.image} alt={pokemon.name} />
+          </div>
+        )}
+
+        {/* CONTENT */}
+        <div className={styles.content}>
+          <p><strong>Type:</strong> {pokemon.type}</p>
+          <p><strong>Level:</strong> {pokemon.level}</p>
+          <p><strong>Shiny:</strong> {pokemon.shiny ? 'Yes' : 'No'}</p>
+          <p><strong>Owner:</strong> {pokemon.owner?.username ?? 'Unknown'}</p>
+        </div>
+
+        {/* ACTIONS */}
+        <div className={styles.actions}>
+          {!isOwner ? (
+            <button
+              className={styles.actionBtn}
+              onClick={() => navigate(`/tradeOffer/${pokemon._id}/create`)}
+            >
+              Trade
+            </button>
+          ) : (
+            <span className={styles.ownerText}>You own this card</span>
+          )}
+        </div>
+
+      </div>
     </div>
   )
 }

@@ -81,7 +81,7 @@ function TradeOffer({findTradeOfferToUpdate, user}) {
               >
               Update
             </button>
-            {offer.status === 'pending' && offer.receiver_id === user._id && (
+            {offer.status === 'pending' && offer.receiver_id._id === user._id && (
             <>
               <button onClick={() => handleRespond(offer._id, 'accepted')}>
                 Accept
