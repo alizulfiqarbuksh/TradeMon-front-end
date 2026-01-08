@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import * as pokemonService from '../../services/pokemonService'
 import { useNavigate } from 'react-router'
+import styles from './MyCards.module.css'
+
 
 const MyCards =  ({user, findPokemonToUpdate, deletePokemon}) => {
     const [myPokemon, setMyPokemon] = useState([])
@@ -42,40 +44,56 @@ const handleDelete = async (id)=>{
 }
 
   return (
-    
-    <div>
-    <h1>My Cards</h1>
-    {myPokemon.length === 0 ?
-     (<p>No Pokemon cards found</p>
+    <div className={styles.page}>
+      <div>
+        <h1 className={styles.title}>My Cards</h1>
 
-     ) : (
-       
-        myPokemon.map((pokemon)=> (
-        
-        <div key={pokemon._id}>
-        <div>{pokemon.image && ( <img src={pokemon.image} alt="Preview" style={{ width: "200px", marginTop: "10px" }} /> )}</div>
-        <h3>Name: {pokemon.name}</h3>
+        {myPokemon.length === 0 ? (
+          <p>No Pokémon cards found</p>
+        ) : (
+          <div className={styles.cards}>
+            {myPokemon.map(pokemon => (
+              <div key={pokemon._id} className={styles.card}>
+                
+                <div className={styles.imageWrapper}>
+                  {pokemon.image && (
+                    <img
+                      src={pokemon.image}
+                      alt={pokemon.name}
+                      className={styles.image}
+                    />
+                  )}
+                </div>
 
-        <p>Type: {pokemon.type}</p>
-      
+                <div className={styles.content}>
+                  <h3 className={styles.name}>{pokemon.name}</h3>
+                  <p className={styles.text}>Type: {pokemon.type}</p>
 
-      <button onClick={()=>handleDelete(pokemon._id)}>Delete</button>
+                  <div className={styles.actions}>
+                    <button
+                      className={`${styles.button} ${styles.delete}`}
+                      onClick={() => handleDelete(pokemon._id)}
+                    >
+                      Delete
+                    </button>
 
-        <button onClick={() => {
-          findPokemonToUpdate(pokemon._id)
-          navigate(`/pokemone/${pokemon._id}/update`)
-        }
-          } >Update</button>
-            
-        </div> )
-        
-        ) 
+                    <button
+                      className={styles.button}
+                      onClick={() => {
+                        findPokemonToUpdate(pokemon._id)
+                        navigate(`/pokemone/${pokemon._id}/update`)
+                      }}
+                    >
+                      Update
+                    </button>
+                  </div>
+                </div>
 
-     ) 
-     
-     
-     }
-    
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

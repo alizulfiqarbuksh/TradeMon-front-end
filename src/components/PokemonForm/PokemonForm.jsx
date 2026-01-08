@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router'
 import * as pokemonService from '../../services/pokemonService'
 import TestImageUpload from '../TestImageUpload/TestImageUpload';
 
+import styles from './PokemonForm.module.css'
+
 function PokemonForm({user, updatePokemonList, pokemonToUpdate, updateOnePokemon}) {
 
   const [formData, setFormData] = useState( pokemonToUpdate ? pokemonToUpdate
@@ -69,31 +71,70 @@ function PokemonForm({user, updatePokemonList, pokemonToUpdate, updateOnePokemon
   }
 
   return (
-    <div>
-      <h1>Add new card</h1>
+    <div className={styles.page}>
+      <div className={styles.formContainer}>
+        <h1 className={styles.title}>
+          {pokemonToUpdate ? 'Update Pokémon' : 'Add New Pokémon'}
+        </h1>
 
-      <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.form}>
 
-        <label htmlFor="name">Name: </label>
-        <input type="text" id='name' name='name' onChange={handleChange} value={formData.name} />
+          <label className={styles.label}>Name</label>
+          <input
+            className={styles.input}
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+          />
 
-        <label htmlFor="type">Type: </label>
-        <input type="text" id='type' name='type' onChange={handleChange} value={formData.type} />
+          <label className={styles.label}>Type</label>
+          <input
+            className={styles.input}
+            type="text"
+            name="type"
+            value={formData.type}
+            onChange={handleChange}
+          />
 
-        <label htmlFor="level">Level: </label>
-        <input type="number" name="level" id="level" onChange={handleChange} value={formData.level} />
+          <label className={styles.label}>Level</label>
+          <input
+            className={styles.input}
+            type="number"
+            name="level"
+            value={formData.level}
+            onChange={handleChange}
+          />
 
-        <label htmlFor="shiny">Shiny: </label>
-        <input type="checkbox" name="shiny" id="shiny" onChange={handleChange} checked={formData.shiny} />
+          <div className={styles.checkboxRow}>
+            <input
+              className={styles.checkbox}
+              type="checkbox"
+              name="shiny"
+              checked={formData.shiny}
+              onChange={handleChange}
+            />
+            <label className={styles.label}>Shiny</label>
+          </div>
 
-        <TestImageUpload onUpload={(url) => setFormData((formData) => ({ ...formData, image: url }))} />
-        
-        <button type="submit">Submit</button>
+          <TestImageUpload
+            onUpload={(url) =>
+              setFormData(prev => ({ ...prev, image: url }))
+            }
+          />
 
-      </form>
+          <button type="submit" className={styles.button}>
+            {pokemonToUpdate ? 'Update Card' : 'Create Card'}
+          </button>
 
-      {formData.image && ( <img src={formData.image} alt="Preview" style={{ width: "200px", marginTop: "10px" }} /> )}
+        </form>
 
+        {formData.image && (
+          <div className={styles.preview}>
+            <img src={formData.image} alt="Preview" />
+          </div>
+        )}
+      </div>
     </div>
   )
 }
