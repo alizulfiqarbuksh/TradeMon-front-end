@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 
 import { UserContext } from '../../contexts/UserContext';
 
+import styles from './NavBar.module.css';
+
 const NavBar = () => {
   const { user, setUser } = useContext(UserContext);
 
@@ -15,26 +17,26 @@ const NavBar = () => {
   // {username, _id} if logged in or null if not, and shows
   // set of the correct set of links
   return (
-    <nav>
+    <nav className={styles.nav}>
       {user ? (
-        <ul>
-          <li>Welcome, {user.username}</li>
-          <li><Link to='/'>Dashboard</Link></li>
-          <li><Link to='/pokemon/mycards'>MyCards</Link></li>
-          <li><Link to='/' onClick={handleSignOut}>Sign Out</Link></li>
-          <li><Link to='/pokemon'>All pokemons</Link></li>
-          <li><Link to='/pokemon/create'>Add a Card</Link></li>
-          <li><Link to='/tradeOffer'>My Trade Offers</Link></li>
-          <li><Link to='/tradeOffer/create'>Add Trade Offers</Link></li>
+        <ul className={styles.list}>
+          <li className={styles.item}>Welcome, {user.username}</li>
+          <li><Link className={styles.link} to="/">Dashboard</Link></li>
+          <li><Link className={styles.link} to="/pokemon/mycards">MyCards</Link></li>
+          <li><Link className={styles.link} to="/" onClick={handleSignOut}>Sign Out</Link></li>
+          <li><Link className={styles.link} to="/pokemon">All Pokemons</Link></li>
+          <li><Link className={styles.link} to="/pokemon/create">Add a Card</Link></li>
+          <li><Link className={styles.link} to="/tradeOffer">My Trade Offers</Link></li>
+          <li><Link className={styles.link} to="/tradeOffer/create">Add Trade Offers</Link></li>
         </ul>
       ) : (
-        <ul>
-          <li><Link to='/'>Home</Link></li>
-          <li><Link to='/sign-in'>Sign In</Link></li>
-          <li><Link to='/sign-up'>Sign Up</Link></li>
-          <li><Link to='/pokemon'>All pokemons</Link></li>
-          <li><Link to='/tradeOffer'>My Trade Offers</Link></li>
-          <li><Link to='/tradeOffer/create'>Add Trade Offers</Link></li>
+        <ul className={styles.list}>
+          <li><Link className={styles.link} to="/">Home</Link></li>
+          <li><Link className={styles.link} to="/sign-in">Sign In</Link></li>
+          <li><Link className={styles.link} to="/sign-up">Sign Up</Link></li>
+          <li><Link className={styles.link} to="/pokemon">All Pokemons</Link></li>
+          <li><Link className={styles.link} to="/tradeOffer">My Trade Offers</Link></li>
+          <li><Link className={styles.link} to="/tradeOffer/create">Add Trade Offers</Link></li>
         </ul>
       )}
     </nav>

@@ -1,0 +1,30 @@
+.nav {
+  /* width: 100vw; */
+  background-color: rgba(5, 15, 40, 0.9);
+  padding: 15px 30px;
+
+  display: flex;
+  justify-content: flex-end;
+}
+
+.list {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+  align-items: center;
+}
+
+
+.item {
+  color: grey;
+  font-weight: bold;
+}
+
+.link {
+  color: grey;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #00bfff;
+}
