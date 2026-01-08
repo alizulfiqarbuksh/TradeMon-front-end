@@ -7,11 +7,11 @@ import { useParams } from 'react-router'
 
 function TradeOfferForm({user, updateTradeOfferList, tradeOfferToUpdate, updateOneTradeOffer}) {
 
+    const [selectedPokemon, setSelectedPokemon] = useState(null)
     const [pokemonToTrade, setPokemonToTrade] = useState({})
     const [myPokemon, setMyPokemon] = useState([])
 
     const {id} = useParams()
-
 
     const [formData, setFormData] = useState( tradeOfferToUpdate ? tradeOfferToUpdate
         :
@@ -30,7 +30,6 @@ function TradeOfferForm({user, updateTradeOfferList, tradeOfferToUpdate, updateO
           try {
     
             const foundPokemon = await pokemonService.details(id)
-            console.log(foundPokemon)
             setPokemonToTrade(foundPokemon)
             
           } catch (error) {
@@ -99,36 +98,47 @@ function TradeOfferForm({user, updateTradeOfferList, tradeOfferToUpdate, updateO
         }
     }
 
-    const handleChange = (event) => {
-        setFormData({...formData, [event.target.name]: event.target.value})
-        console.log(formData)
-    }
-
-    const selectedCard = (id) => {
-        setFormData({...formData, sender_pokemon_id: id})
+    const selectedCard = (pokemon) => {
+        setFormData({...formData, sender_pokemon_id: pokemon._id})
+        setSelectedPokemon(pokemon)
     }
 
   return (
     <div>
-        <h1>Add new card</h1>
+        <h1>Trade Cards</h1>
 
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="sender_id">Sender ID:</label>
-            <input type="text" id="sender_id" name="sender_id" onChange={handleChange} value={formData.sender_id}></input>
+        <div>
+            {selectedPokemon ? 
+            <div>
+            <div>
+                {selectedPokemon.image && ( <img src={selectedPokemon.image} alt="Preview" style={{ width: "200px", marginTop: "10px" }} /> )}
+                <p>{selectedPokemon.name}</p>
+                <p>{selectedPokemon.title}</p>
+                <p>{selectedPokemon.level}</p>
+                {selectedPokemon.shiny ? <p>Shiny: Yes</p> : <p>Shiny: No</p>}
+            </div>
+            <div>
+                <p>Sender: {user.username}</p>
+            </div>
+            </div>
+             :
+             <h3>Select a Pokemon to trade</h3>
+             }
+        </div>
+        <div>
+            <div>
+                {pokemonToTrade.image && ( <img src={pokemonToTrade.image} alt="Preview" style={{ width: "200px", marginTop: "10px" }} /> )}
+                <p>{pokemonToTrade.name}</p>
+                <p>{pokemonToTrade.title}</p>
+                <p>{pokemonToTrade.level}</p>
+                {pokemonToTrade.shiny ? <p>Shiny: Yes</p> : <p>Shiny: No</p>}
+            </div>
+            <div>
+                Receiver: {pokemonToTrade?.owner?.username}
+            </div>
+        </div>
 
-            <label htmlFor="receiver_id">Receiver ID:</label>
-            <input type="text" id="receiver_id" name="receiver_id" value={pokemonToTrade?.owner?._id}></input>
-
-            <label htmlFor="sender_pokemon_id">Sender Pokemon ID:</label>
-            <input type="text" id='sender_pokemon_id' name='sender_pokemon_id' onChange={handleChange} value={formData.sender_pokemon_id} />
-
-            <label htmlFor="receiver_pokemon_id">Receiver Pokemon ID:</label>
-            <input type="text" id="receiver_pokemon_id" name="receiver_pokemon_id" onChange={handleChange} value={formData.receiver_pokemon_id}></input>
-
-            <input type="hidden" id="status" name="status" value="pending"></input>
-
-            <button type="submit">Submit</button>
-        </form>
+        <button onClick={handleSubmit} >Trade</button>
 
         <h1>My Cards</h1>
     {myPokemon.length === 0 ?
@@ -139,12 +149,14 @@ function TradeOfferForm({user, updateTradeOfferList, tradeOfferToUpdate, updateO
         myPokemon.map((pokemon)=> (
         
         <div key={pokemon._id}>
+        
+        {pokemon.image && ( <img src={pokemon.image} alt="Preview" style={{ width: "200px", marginTop: "10px" }} /> )}
 
         <h3>Name: {pokemon.name}</h3>
 
         <p>Type: {pokemon.type}</p>
 
-        <button onClick={() => {selectedCard(pokemon._id)}}>Select</button>
+        <button onClick={() => {selectedCard(pokemon)}}>Select</button>
             
         </div> )
         

@@ -63,7 +63,7 @@ const handleDelete = async (id)=>{
 
         <button onClick={() => {
           findPokemonToUpdate(pokemon._id)
-          navigate(`/pokemone/${pokemon._id}/update`)
+          navigate(`/pokemon/${pokemon._id}/update`)
         }
           } >Update</button>
             
