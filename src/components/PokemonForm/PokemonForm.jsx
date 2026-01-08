@@ -5,7 +5,7 @@ import TestImageUpload from '../TestImageUpload/TestImageUpload'
 
 import styles from './PokemonForm.module.css'
 
-function PokemonForm({ user, updatePokemonList, updateOnePokemon }) {
+function PokemonForm({ user, updatePokemonList, updateOnePokemon, pokemonToUpdate }) {
   const { id } = useParams()
   const navigate = useNavigate()
 
