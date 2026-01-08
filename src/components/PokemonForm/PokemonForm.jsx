@@ -50,7 +50,7 @@ function PokemonForm({user, updatePokemonList, pokemonToUpdate, updateOnePokemon
 
         if (pokemon) {
           updatePokemonList(pokemon)
-          navigate('/pokemon')
+          navigate('/pokemon/mycards')
         } else {
           console.log("something went wrong")
         }

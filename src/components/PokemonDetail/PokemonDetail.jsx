@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router'
 
 function PokemonDetail({user}) {
 
-  const [pokemon, setPokemon] = useState({})
+  const [pokemon, setPokemon] = useState(null)
   const {id} = useParams()
 
   const navigate = useNavigate()
@@ -28,10 +28,12 @@ function PokemonDetail({user}) {
   }, [id])
        
    
+  if(!id) return <h1>Loading...</h1>
+  if(!pokemon) return <h1>Loading...</h1>
+  if (!user?._id) return <h1>Loading...</h1>
+  
   const ownerId = pokemon?.owner?._id ?? null;
   const isOwner = user?._id === ownerId;
-  
-  const authReady = Boolean(user?._id)
   
    
   return (

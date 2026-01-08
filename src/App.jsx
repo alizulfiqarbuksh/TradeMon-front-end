@@ -120,7 +120,7 @@ const deletePokemon = (id) => {
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/pokemon' element={<Pokemon pokemons={pokemons} />} />
-        <Route path='/tradeOffer' element={<TradeOffer tradeOffers={tradeOffers} findTradeOfferToUpdate={findTradeOfferToUpdate}/>} />
+        <Route path='/tradeOffer' element={<TradeOffer tradeOffers={tradeOffers} findTradeOfferToUpdate={findTradeOfferToUpdate} user={user}/>} />
         <Route path='/tradeOffer/:id' element={<TradeOfferDetail />} />
         <Route path='/pokemon/create' element={<PokemonForm user={user} updatePokemonList={updatePokemonList} />} />
         <Route path='/pokemon/:id' element={<PokemonDetail user={user} />} />
