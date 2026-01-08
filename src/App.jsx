@@ -39,11 +39,13 @@ const App = () => {
         const pokemons = await pokemonService.show()
         setPokemons(pokemons)
       
+      }
+      catch (error) {
+        console.log(error)
+      }
     }
-     catch (error) {
-      console.log(error)
-    }
-    }
+    
+    getPokemons()
 
     const getTradeOffers = async () => {
       try {
@@ -55,7 +57,11 @@ const App = () => {
       }
     }
 
-    getPokemons()
+        if(!user?._id){
+      setTradeOffers([])
+      return
+    }
+ 
     getTradeOffers()
 
   }, [])
