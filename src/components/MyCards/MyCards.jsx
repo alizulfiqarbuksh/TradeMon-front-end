@@ -77,7 +77,6 @@ const handleDelete = async (id)=>{
                       Delete
                     </button>
 
-<<<<<<< HEAD
                     <button
                       className={styles.button}
                       onClick={() => {
@@ -89,17 +88,6 @@ const handleDelete = async (id)=>{
                     </button>
                   </div>
                 </div>
-=======
-        <button onClick={() => {
-          findPokemonToUpdate(pokemon._id)
-          navigate(`/pokemon/${pokemon._id}/update`)
-        }
-          } >Update</button>
-            
-        </div> )
-        
-        ) 
->>>>>>> main
 
               </div>
             ))}

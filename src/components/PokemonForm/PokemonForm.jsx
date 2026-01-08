@@ -1,26 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router'
 import * as pokemonService from '../../services/pokemonService'
-<<<<<<< HEAD
-import TestImageUpload from '../TestImageUpload/TestImageUpload';
+import TestImageUpload from '../TestImageUpload/TestImageUpload'
 
 import styles from './PokemonForm.module.css'
-
-function PokemonForm({user, updatePokemonList, pokemonToUpdate, updateOnePokemon}) {
-
-  const [formData, setFormData] = useState( pokemonToUpdate ? pokemonToUpdate
-    :
-    {
-            name: "",
-            type: "",
-            level: 0,
-            shiny: false,
-            owner: "",
-            image: "",
-  })
-=======
-import TestImageUpload from '../TestImageUpload/TestImageUpload'
->>>>>>> main
 
 function PokemonForm({ user, updatePokemonList, updateOnePokemon }) {
   const { id } = useParams()
