@@ -4,6 +4,9 @@ import { UserContext } from '../../contexts/UserContext';
 
 import * as testService from '../../services/testService';
 
+import styles from './Dashboard.module.css'
+
+
 const Dashboard = () => {
   // Access the user object from UserContext
   // This gives us the currently logged-in user's information (username, email) that we extract from the token
@@ -34,14 +37,38 @@ const Dashboard = () => {
   }, [user]); // only fetch if after context loads the user from localStorage
 
   return (
-    <main>
-      <h1>Welcome, {user.username}</h1>
-      <p>
-        This is the dashboard page where you can test your authentication.
-      </p>
-      <p><strong>{message}</strong></p>
-    </main>
-  );
+    <div className={styles.page}>
+      <div className={styles.main}>
+
+        {/* LEFT IMAGE */}
+        <div className={styles.image}></div>
+
+        {/* RIGHT CONTENT */}
+        <div className={styles.content}>
+          <h1 className={styles.title}>
+             Welcome, {user ? user.username : 'Guest'}
+          </h1>
+
+          <p className={styles.text}>
+            Welcome to your Pokémon Trading Dashboard.
+            Here you can manage your Pokémon cards, build your personal collection,
+            and trade with other trainers.
+          </p>
+
+          <p className={styles.text}>
+            Add new Pokémon cards, update your existing ones,
+            and explore trade offers from other players.
+            Every card matters — build the ultimate collection.
+          </p>
+
+          {message && (
+            <p className={styles.message}>{message}</p>
+          )}
+        </div>
+
+      </div>
+    </div>
+  )
 };
 
 export default Dashboard;

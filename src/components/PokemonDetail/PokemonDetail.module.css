@@ -1,0 +1,71 @@
+.pageWrapper {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+  background-color: #0a0a0a;
+}
+
+.cardContainer {
+  width: 900px;
+  background-color: rgba(5, 15, 40, 0.9);
+  padding: 50px;
+  border: 1px solid rgba(0, 191, 255, 0.35);
+  display: flex;
+  flex-direction: column;
+}
+
+/* TITLE */
+.title {
+  font-size: 2.6rem;
+  margin-bottom: 25px;
+  color: #00bfff;
+}
+
+/* IMAGE */
+.imageWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.imageWrapper img {
+  max-width: 300px;
+  border-radius: 6px;
+}
+
+/* CONTENT */
+.content p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  margin-bottom: 10px;
+  color: #e6e6e6;
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.actionBtn {
+  padding: 8px 14px;
+  background-color: transparent;
+  border: 1px solid #00bfff;
+  color: #00bfff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.actionBtn:hover {
+  background-color: #00bfff;
+  color: #000;
+}
+
+.ownerText {
+  color: #00bfff;
+  font-weight: bold;
+}
