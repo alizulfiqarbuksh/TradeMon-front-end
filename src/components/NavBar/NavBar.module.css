@@ -4,12 +4,13 @@
   padding: 15px 30px;
 
   display: flex;
-  justify-content: flex-end;
+  justify-content: center; /* center the nav links */
+  align-items: center;
 }
 
 .list {
   display: flex;
-  gap: 22px;
+  gap: 32px;
   list-style: none;
   align-items: center;
 }
