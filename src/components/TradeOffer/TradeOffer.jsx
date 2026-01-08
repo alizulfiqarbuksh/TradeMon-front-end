@@ -11,7 +11,7 @@ function TradeOffer({findTradeOfferToUpdate, user}) {
     useEffect(() => {
     const fetchTrades = async () => {
       try {
-        const trades = await tradeOfferService.show(); // fetches trades where user is sender or receiver
+        const trades = await tradeOfferService.show();
         setTradeOffers(trades);
       } catch (err) {
         console.error('Failed to fetch trades', err);
@@ -42,12 +42,37 @@ function TradeOffer({findTradeOfferToUpdate, user}) {
       ) : (
         tradeOffers.map((offer) => (
           <div key={offer._id} style={{ border: '1px solid #ccc', padding: '10px', margin: '10px 0' }}>
-            <h3>Sender id: {offer.sender_id}</h3>
-            <h3>Receiver id: {offer.receiver_id}</h3>
-            <h3>Sender Pokemon id: {offer.sender_pokemon_id}</h3>
-            <h3>Receiver Pokemon id: {offer.receiver_pokemon_id}</h3>
+
+            <div>
+              <div>
+                {offer?.sender_pokemon_id?.image && ( <img src={offer?.sender_pokemon_id?.image} alt="Preview" style={{ width: "200px", marginTop: "10px" }} /> )}
+                <p>{offer?.sender_pokemon_id?.name}</p>
+                <p>{offer.sender_pokemon_id.type}</p>
+                <p>{offer.sender_pokemon_id.level}</p>
+                {offer.sender_pokemon_id.shiny ? <p>Shiny: yes</p> : <p>Shiny: yes</p>}
+              </div>
+              <div>
+                <h3>Sender: {offer.sender_id.username}</h3>
+              </div>
+            </div>
+
+            <div>
+              <div>
+                {offer?.receiver_pokemon_id?.image && ( <img src={offer?.receiver_pokemon_id?.image} alt="Preview" style={{ width: "200px", marginTop: "10px" }} /> )}
+                <p>{offer?.receiver_pokemon_id?.name}</p>
+                <p>{offer.receiver_pokemon_id.type}</p>
+                <p>{offer.receiver_pokemon_id.level}</p>
+                {offer.receiver_pokemon_id.shiny ? <p>Shiny: yes</p> : <p>Shiny: yes</p>}
+              </div>
+              <div>
+                <h3>Receiver: {offer.receiver_id.username}</h3>
+              </div>
+            </div>
+
             <h3>Status: {offer.status}</h3>
+
             <button onClick={() => navigate(`/tradeOffer/${offer._id}`)}>View Details</button>
+
             <button
               onClick={() => {
                 findTradeOfferToUpdate(offer._id);
