@@ -8,8 +8,7 @@ function TradeOffer({findTradeOfferToUpdate, user}) {
 
     const [tradeOffers, setTradeOffers] = useState([])
 
-    useEffect(() => {
-    const fetchTrades = async () => {
+        const fetchTrades = async () => {
       try {
         const trades = await tradeOfferService.show();
         setTradeOffers(trades);
@@ -17,6 +16,8 @@ function TradeOffer({findTradeOfferToUpdate, user}) {
         console.error('Failed to fetch trades', err);
       }
     };
+    useEffect(() => {
+
     fetchTrades();
   }, []);
 
@@ -25,11 +26,7 @@ function TradeOffer({findTradeOfferToUpdate, user}) {
   const handleRespond = async (id, action) => {
     const updatedTrade = await tradeOfferService.respond(id, action);
 
-    setTradeOffers(prev =>
-      prev.map(trade =>
-        trade._id === updatedTrade._id ? updatedTrade : trade
-      )
-    );
+    fetchTrades()
   };
  
   

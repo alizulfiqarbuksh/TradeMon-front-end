@@ -20,23 +20,20 @@ const NavBar = () => {
     <nav className={styles.nav}>
       {user ? (
         <ul className={styles.list}>
-          <li className={styles.item}>Welcome, {user.username}</li>
           <li><Link className={styles.link} to="/">Dashboard</Link></li>
           <li><Link className={styles.link} to="/pokemon/mycards">MyCards</Link></li>
           <li><Link className={styles.link} to="/" onClick={handleSignOut}>Sign Out</Link></li>
           <li><Link className={styles.link} to="/pokemon">All Pokemons</Link></li>
           <li><Link className={styles.link} to="/pokemon/create">Add a Card</Link></li>
           <li><Link className={styles.link} to="/tradeOffer">My Trade Offers</Link></li>
-          <li><Link className={styles.link} to="/tradeOffer/create">Add Trade Offers</Link></li>
+          <li className={styles.item}>Welcome, {user.username}</li>
         </ul>
       ) : (
         <ul className={styles.list}>
-          <li><Link className={styles.link} to="/">Home</Link></li>
+          <li><Link className={styles.link} to="/">Dashboard</Link></li>
           <li><Link className={styles.link} to="/sign-in">Sign In</Link></li>
           <li><Link className={styles.link} to="/sign-up">Sign Up</Link></li>
           <li><Link className={styles.link} to="/pokemon">All Pokemons</Link></li>
-          <li><Link className={styles.link} to="/tradeOffer">My Trade Offers</Link></li>
-          <li><Link className={styles.link} to="/tradeOffer/create">Add Trade Offers</Link></li>
         </ul>
       )}
     </nav>
