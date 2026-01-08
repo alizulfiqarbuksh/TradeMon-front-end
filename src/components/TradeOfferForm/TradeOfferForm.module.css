@@ -1,0 +1,85 @@
+/* Main page wrapper like TradeOffer */
+.pageWrapper {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+  background-color: #0a0a0a; /* dark background */
+}
+
+/* Container for the form content */
+.cardContainer {
+  width: 1100px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  background-color: rgba(5, 15, 40, 0.9); /* slightly transparent card */
+  border: 1px solid rgba(0, 191, 255, 0.35);
+  padding: 30px;
+  border-radius: 8px;
+}
+
+/* Titles */
+.title {
+  font-size: 2.6rem;
+  color: #00bfff;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Pokemon row with vertical line */
+.pokemonRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  position: relative;
+}
+
+.pokemonRow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background-color: rgba(0, 191, 255, 0.3);
+  transform: translateX(-50%);
+}
+
+/* Pokemon box */
+.pokemonBox {
+  flex: 1;
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* Pokemon image */
+.pokemonImage {
+  max-width: 200px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+/* Action buttons */
+.actionBtn {
+  padding: 8px 14px;
+  background-color: transparent;
+  border: 1px solid #00bfff;
+  color: #00bfff;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.actionBtn:hover {
+  background-color: #00bfff;
+  color: #000;
+}
+
+/* My Pokemon row */
+.myPokemonRow {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}

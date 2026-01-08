@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import * as tradeOfferService from '../../services/tradeOfferService'
 import { useNavigate } from 'react-router'
 
+import styles from './TradeOffer.module.css'
+
+
 function TradeOffer({findTradeOfferToUpdate, user}) {
 
     const navigate = useNavigate();
@@ -31,68 +34,104 @@ function TradeOffer({findTradeOfferToUpdate, user}) {
  
   
   return (
-    <div>
-      <h1>All Trade Offers</h1>
+  <div className={styles.pageWrapper}>
+    <div className={styles.cardContainer}>
+      <h1 className={styles.title}>My Trade Offers</h1>
 
       {tradeOffers.length === 0 ? (
-        <p>No trade offers found.</p>
+        <p className={styles.emptyText}>No trade offers found.</p>
       ) : (
         tradeOffers.map((offer) => (
-          <div key={offer._id} style={{ border: '1px solid #ccc', padding: '10px', margin: '10px 0' }}>
+          <div key={offer._id} className={styles.tradeCard}>
 
-            <div>
-              <div>
-                {offer?.sender_pokemon_id?.image && ( <img src={offer?.sender_pokemon_id?.image} alt="Preview" style={{ width: "200px", marginTop: "10px" }} /> )}
-                <p>{offer?.sender_pokemon_id?.name}</p>
-                <p>{offer.sender_pokemon_id.type}</p>
-                <p>{offer.sender_pokemon_id.level}</p>
-                {offer.sender_pokemon_id.shiny ? <p>Shiny: yes</p> : <p>Shiny: yes</p>}
+            <div className={styles.pokemonRow}>
+              {/* SENDER */}
+              <div className={styles.pokemonBox}>
+                {offer?.sender_pokemon_id?.image && (
+                  <img
+                    src={offer.sender_pokemon_id.image}
+                    alt="Sender Pokémon"
+                    className={styles.pokemonImage}
+                  />
+                )}
+                <p className={styles.pokemonText}>{offer.sender_pokemon_id.name}</p>
+                <p className={styles.pokemonText}>Type: {offer.sender_pokemon_id.type}</p>
+                <p className={styles.pokemonText}>Level: {offer.sender_pokemon_id.level}</p>
+                <p className={styles.pokemonText}>
+                  Shiny: {offer.sender_pokemon_id.shiny ? 'Yes' : 'No'}
+                </p>
+                <p className={styles.userText}>
+                  Sender: {offer.sender_id.username}
+                </p>
               </div>
-              <div>
-                <h3>Sender: {offer.sender_id.username}</h3>
+
+              {/* RECEIVER */}
+              <div className={styles.pokemonBox}>
+                {offer?.receiver_pokemon_id?.image && (
+                  <img
+                    src={offer.receiver_pokemon_id.image}
+                    alt="Receiver Pokémon"
+                    className={styles.pokemonImage}
+                  />
+                )}
+                <p className={styles.pokemonText}>{offer.receiver_pokemon_id.name}</p>
+                <p className={styles.pokemonText}>Type: {offer.receiver_pokemon_id.type}</p>
+                <p className={styles.pokemonText}>Level: {offer.receiver_pokemon_id.level}</p>
+                <p className={styles.pokemonText}>
+                  Shiny: {offer.receiver_pokemon_id.shiny ? 'Yes' : 'No'}
+                </p>
+                <p className={styles.userText}>
+                  Receiver: {offer.receiver_id.username}
+                </p>
               </div>
             </div>
 
-            <div>
-              <div>
-                {offer?.receiver_pokemon_id?.image && ( <img src={offer?.receiver_pokemon_id?.image} alt="Preview" style={{ width: "200px", marginTop: "10px" }} /> )}
-                <p>{offer?.receiver_pokemon_id?.name}</p>
-                <p>{offer.receiver_pokemon_id.type}</p>
-                <p>{offer.receiver_pokemon_id.level}</p>
-                {offer.receiver_pokemon_id.shiny ? <p>Shiny: yes</p> : <p>Shiny: yes</p>}
-              </div>
-              <div>
-                <h3>Receiver: {offer.receiver_id.username}</h3>
-              </div>
-            </div>
+            <p className={styles.status}>Status: {offer.status}</p>
 
-            <h3>Status: {offer.status}</h3>
-
-            <button onClick={() => navigate(`/tradeOffer/${offer._id}`)}>View Details</button>
-
-            <button
-              onClick={() => {
-                findTradeOfferToUpdate(offer._id);
-                navigate(`/tradeOffer/${offer._id}/update`);
-              }}
+            <div className={styles.actions}>
+              <button
+                className={styles.actionBtn}
+                onClick={() => navigate(`/tradeOffer/${offer._id}`)}
               >
-              Update
-            </button>
-            {offer.status === 'pending' && offer.receiver_id._id === user._id && (
-            <>
-              <button onClick={() => handleRespond(offer._id, 'accepted')}>
-                Accept
+                View Details
               </button>
-              <button onClick={() => handleRespond(offer._id, 'rejected')}>
-                Reject
+
+              <button
+                className={styles.actionBtn}
+                onClick={() => {
+                  findTradeOfferToUpdate(offer._id);
+                  navigate(`/tradeOffer/${offer._id}/update`);
+                }}
+              >
+                Update
               </button>
-            </>
-          )}
+
+              {offer.status === 'pending' &&
+                offer.receiver_id._id === user._id && (
+                  <>
+                    <button
+                      className={styles.actionBtn}
+                      onClick={() => handleRespond(offer._id, 'accepted')}
+                    >
+                      Accept
+                    </button>
+                    <button
+                      className={styles.actionBtn}
+                      onClick={() => handleRespond(offer._id, 'rejected')}
+                    >
+                      Reject
+                    </button>
+                  </>
+                )}
+            </div>
+
           </div>
         ))
       )}
     </div>
-  )
+  </div>
+)
+
 }
 
 export default TradeOffer
