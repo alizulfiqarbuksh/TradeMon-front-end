@@ -10,6 +10,7 @@ const show = async () => {
       Authorization: `Bearer ${getToken()}`
     }
   });
+
   return response.data.tradeOffers;
 };
 
