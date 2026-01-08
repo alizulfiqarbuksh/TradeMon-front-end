@@ -1,72 +1,71 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router'
 import * as pokemonService from '../../services/pokemonService'
-import TestImageUpload from '../TestImageUpload/TestImageUpload';
+import TestImageUpload from '../TestImageUpload/TestImageUpload'
 
-function PokemonForm({user, updatePokemonList, pokemonToUpdate, updateOnePokemon}) {
-
-  const [formData, setFormData] = useState( pokemonToUpdate ? pokemonToUpdate
-    :
-    {
-            name: "",
-            type: "",
-            level: 0,
-            shiny: false,
-            owner: "",
-            image: "",
-  })
-
+function PokemonForm({ user, updatePokemonList, updateOnePokemon }) {
+  const { id } = useParams()
   const navigate = useNavigate()
 
-  const handleSubmit = async (event) => {
-    event.preventDefault()
+  const isEdit = Boolean(id)
 
-    const payload = {...formData, owner: user._id}
-    console.log(payload)
+  const [formData, setFormData] = useState({
+    name: "",
+    type: "",
+    level: 0,
+    shiny: false,
+    image: ""
+  })
 
-    if (pokemonToUpdate) {
+  const [loading, setLoading] = useState(true)
 
+  useEffect(() => {
+    if (!isEdit) {
+      setLoading(false)
+      return
+    }
+
+    const fetchPokemon = async () => {
       try {
-
-        const updatedPokemon = await pokemonService.update(pokemonToUpdate._id, payload)
-
-        if (updatedPokemon) {
-          updateOnePokemon(updatedPokemon)
-          navigate('/pokemon/mycards')
-        }
-        else {
-          console.log("something went wrong")
-        }
-        
-      } catch (error) {
-        console.log(error)
-      }
-
-    }
-    else {
-        try {
-
-        const pokemon = await pokemonService.create(payload)
-
-        if (pokemon) {
-          updatePokemonList(pokemon)
-          navigate('/pokemon')
-        } else {
-          console.log("something went wrong")
-        }
-        
-      } catch (error) {
-        console.log(error)
+        const pokemon = await pokemonService.details(id)
+        setFormData(pokemon)
+        setLoading(false)
+      } catch (err) {
+        console.log(err)
+        navigate('/pokemon/mycards', { replace: true })
       }
     }
 
+    fetchPokemon()
+  }, [id, isEdit, navigate])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const payload = { ...formData, owner: user._id }
+
+    try {
+      if (isEdit) {
+        const updated = await pokemonService.update(id, payload)
+        updateOnePokemon(updated)
+        navigate('/pokemon/mycards')
+      } else {
+        const created = await pokemonService.create(payload)
+        updatePokemonList(created)
+        navigate('/pokemon')
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
 
-  const handleChange = (event) => {
-    const {name, value, checked, type} = event.target
-    setFormData({...formData, [name]: type === 'checkbox' ? checked : value})
-    console.log(formData)
+  const handleChange = (e) => {
+    const { name, value, checked, type } = e.target
+    setFormData({ ...formData, [name]: type === 'checkbox' ? checked : value })
   }
+
+  if (!user) return <p>Please sign in</p>
+  if (loading) return <p>Loading...</p>
 
   return (
     <div>
