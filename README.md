@@ -1,16 +1,61 @@
-# React + Vite
+![TradeMon Home](./src/assets/Images/Screenshot%202026-01-11%20013039.png)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# TradeMon – Pokémon Card Trading Platform
 
-Currently, two official plugins are available:
+**TradeMon** is a community-driven Pokémon card trading website where collectors can put cards up for trade, and exchange cards with other users. The platform makes trading simple by allowing users to browse available cards and send trade requests. When a trade is accepted, ownership is swapped automatically, creating a seamless digital trading experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project was built to provide a dedicated space for Pokémon card collectors to interact, trade, and grow their collections without needing external platforms or forums.
 
-## React Compiler
+# Getting started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Front-end Repo: *[TradeMon](https://github.com/alizulfiqarbuksh/TradeMon-front-end)*
+Back-end Repo: *[Back-end](https://github.com/alizulfiqarbuksh/TradeMon-back-end)*
 
-## Expanding the ESLint configuration
+# Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Users can:
+
+- Add their owned cards to their collection
+- Mark cards as **available for trade**
+- Browse other users’ tradeable cards
+- Send trade requests to other collectors
+- Accept or reject incoming trade offers
+- Have card ownership automatically updated after accepted trades
+- View and manage their portfolio of cards
+
+# Attributions
+
+External libraries and services used:
+
+- **Express.js**
+- **MongoDB + Mongoose**
+- **Cloudinary**
+
+# Technologies used
+
+The technologies used to complete this project include:
+
+- **HTML**
+- **CSS**
+- **JavaScript**
+- **React**
+- **Node.js + Express**
+- **MongoDB + Mongoose**
+- **Cloudinary** (for media storage)
+- Research resources such as **Google** and **YouTube**
+
+# Next steps
+
+Future enhancements planned for TradeMon:
+
+- **Notifications**
+  Users get notified when trade requests are received, accepted, or rejected.
+
+- **Search & Filters**
+  Filter cards by Pokémon name, type, rarity, or owner.
+
+- **Direct Communication**
+  Messaging or contact system for users to coordinate in-person trades.
+
+- **User Profiles**
+  Ability to view another user’s full collection and trade history.

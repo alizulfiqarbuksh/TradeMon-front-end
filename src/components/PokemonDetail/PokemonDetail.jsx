@@ -32,10 +32,11 @@ function PokemonDetail({user}) {
    
   if(!id) return <h1>Loading...</h1>
   if(!pokemon) return <h1>Loading...</h1>
-  if (!user?._id) return <h1>Loading...</h1>
+  
   
   const ownerId = pokemon?.owner?._id ?? null;
-  const isOwner = user?._id === ownerId;
+  const isLoggedIn = Boolean(user?._id)
+  const isOwner = isLoggedIn && user?._id === ownerId;
   
    
   return (
@@ -62,16 +63,26 @@ function PokemonDetail({user}) {
 
         {/* ACTIONS */}
         <div className={styles.actions}>
-          {!isOwner ? (
+          
+          {isLoggedIn && !isOwner && (
             <button
               className={styles.actionBtn}
               onClick={() => navigate(`/tradeOffer/${pokemon._id}/create`)}
             >
               Trade
             </button>
-          ) : (
+          )} 
+          
+          
+          {isLoggedIn && isOwner && (
             <span className={styles.ownerText}>You own this card</span>
           )}
+
+         
+          {!isLoggedIn && (
+            <span className={styles.ownerText}>Sign in to trade</span>
+          )}
+
         </div>
 
       </div>

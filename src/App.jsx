@@ -1,4 +1,4 @@
-import { use, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router';
 import * as tradeOfferService from './services/tradeOfferService';
 import * as pokemonService from './services/pokemonService'
@@ -6,11 +6,9 @@ import * as pokemonService from './services/pokemonService'
 import NavBar from './components/NavBar/NavBar';
 import SignUpForm from './components/SignUpForm/SignUpForm';
 import SignInForm from './components/SignInForm/SignInForm';
-import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 import Pokemon from './components/Pokemon/Pokemon';
 import TradeOffer from './components/TradeOffer/TradeOffer';
-import TradeOfferDetail from './components/TradeOfferDetail/TradeOfferDetail';
 import PokemonDetail from './components/PokemonDetail/PokemonDetail';
 import TradeOfferForm from './components/TradeOfferForm/TradeOfferForm';
 
@@ -26,8 +24,6 @@ const App = () => {
   const [pokemons, setPokemons] = useState([])
 
   const [pokemonToUpdate, setPokemonToUpdate] = useState(null)
-
-  const [tradeOfferToUpdate, setTradeOfferToUpdate] = useState([])
 
   const [tradeOffers, setTradeOffers] = useState([])
 
@@ -64,7 +60,7 @@ const App = () => {
  
     getTradeOffers()
 
-  }, [])
+  }, [user?._id])
 
   const updateTradeOfferList = (tradeOffer) => {
     setTradeOffers([...tradeOffers, tradeOffer])
@@ -91,23 +87,6 @@ const App = () => {
     setPokemons(newPokemonList)
   }
 
-  const findTradeOfferToUpdate = (tradeOfferToUpdateId) => {
-      const foundTradeoffer = tradeOffers.find((tradeOffer) => tradeOffer._id === tradeOfferToUpdateId)
-      setTradeOfferToUpdate(foundTradeoffer)
-  }
-
-  const updateOneTradeOffer = (tradeOfferObj) => {
-      const newTradeOfferList = tradeOffers.map((tradeOffer)=>{
-        if(tradeOffer._id === tradeOfferObj._id) {
-          return tradeOfferObj
-        }
-        else {
-          return tradeOffer
-        }
-      })
-
-      setTradeOffers(newTradeOfferList)
-  }
 
 const deletePokemon = (id) => {
 
@@ -121,19 +100,16 @@ const deletePokemon = (id) => {
     <>
       <NavBar/>
       <Routes>
-        {/* if the user is logged in we have the user object else we have the user set to null */}
         <Route path='/' element={<Dashboard />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/pokemon' element={<Pokemon pokemons={pokemons} />} />
-        <Route path='/tradeOffer' element={<TradeOffer tradeOffers={tradeOffers} findTradeOfferToUpdate={findTradeOfferToUpdate} user={user}/>} />
-        <Route path='/tradeOffer/:id' element={<TradeOfferDetail />} />
+        <Route path='/tradeOffer' element={<TradeOffer user={user}/>} />
         <Route path='/pokemon/create' element={<PokemonForm user={user} updatePokemonList={updatePokemonList} />} />
         <Route path='/pokemon/:id' element={<PokemonDetail user={user} />} />
         <Route path='/tradeOffer/:id/create' element={<TradeOfferForm user={user} updateTradeOfferList={updateTradeOfferList}/>} />
         <Route path='/pokemon/:id/update' element={<PokemonForm user={user}  updateOnePokemon={updateOnePokemon} />} />
         <Route path='/pokemon/mycards' element={<MyCards pokemons={pokemons} user={user} deletePokemon={deletePokemon}  findPokemonToUpdate={findPokemonToUpdate} />} />
-        <Route path='/tradeOffer/:id/update' element={<TradeOfferForm user={user}  tradeOfferToUpdate={tradeOfferToUpdate} updateOneTradeOffer={updateOneTradeOffer}/>} />
 
       </Routes>
     </>
