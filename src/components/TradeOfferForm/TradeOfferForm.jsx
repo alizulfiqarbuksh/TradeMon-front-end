@@ -8,7 +8,7 @@ import { useParams } from 'react-router'
 import styles from './TradeOfferForm.module.css';
 
 
-function TradeOfferForm({user, updateTradeOfferList, tradeOfferToUpdate, updateOneTradeOffer}) {
+function TradeOfferForm({ user }) {
 
     const [selectedPokemon, setSelectedPokemon] = useState(null)
     const [pokemonToTrade, setPokemonToTrade] = useState({})
@@ -16,16 +16,10 @@ function TradeOfferForm({user, updateTradeOfferList, tradeOfferToUpdate, updateO
 
     const {id} = useParams()
 
-    const [formData, setFormData] = useState( tradeOfferToUpdate ? tradeOfferToUpdate
-        :
-        {
-            sender_id: user._id,
-            receiver_id: "",
-            sender_pokemon_id: "",
-            receiver_pokemon_id: id,
-            status: "pending"
-
-    })
+    const [formData, setFormData] = useState({
+  sender_pokemon_id: "",
+  receiver_pokemon_id: id,
+});
 
     useEffect(() => {
       
@@ -61,45 +55,21 @@ function TradeOfferForm({user, updateTradeOfferList, tradeOfferToUpdate, updateO
     const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
+    event.preventDefault();
 
-        console.log(formData)
-        event.preventDefault()
+    try {
+      if (!formData.sender_pokemon_id) return;
 
-        if(tradeOfferToUpdate){
-            try {
-                const updatedTradeOffer = await tradeOfferService.update(formData, tradeOfferToUpdate._id)
+      await tradeOfferService.create({
+        sender_pokemon_id: formData.sender_pokemon_id,
+        receiver_pokemon_id: id,
+      });
 
-                if(updatedTradeOffer) {
-                    updateOneTradeOffer(updatedTradeOffer)
-                    navigate('/tradeOffer')
-                }
-                else {
-                    console.log('Something went wrong')
-                }
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        else {
-            try {
-                const body = {
-                    ...formData,
-                    receiver_id: pokemonToTrade.owner._id
-                }
-            const tradeOffer = await tradeOfferService.create(body)
-
-            if(tradeOffer){
-                updateTradeOfferList(tradeOffer)
-                navigate('/tradeOffer')
-            }
-            else{
-                console.log("Something went wrong")
-            }
-        } catch (error) {
-            console.log(error)
-        }
-        }
+      navigate('/tradeOffer');
+    } catch (error) {
+      console.log(error);
     }
+  };
 
     const selectedCard = (pokemon) => {
         setFormData({...formData, sender_pokemon_id: pokemon._id})

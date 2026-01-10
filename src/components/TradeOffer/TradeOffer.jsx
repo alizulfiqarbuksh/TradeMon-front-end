@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import * as tradeOfferService from '../../services/tradeOfferService'
-import { useNavigate } from 'react-router'
 
 import styles from './TradeOffer.module.css'
 
 
-function TradeOffer({findTradeOfferToUpdate, user}) {
+function TradeOffer({ user }) {
 
-    const navigate = useNavigate();
 
     const [tradeOffers, setTradeOffers] = useState([])
 
@@ -20,11 +18,11 @@ function TradeOffer({findTradeOfferToUpdate, user}) {
       }
     };
     useEffect(() => {
-
+    if (!user?._id) return;
     fetchTrades();
-  }, []);
+  }, [user?._id]);
 
-  if (!user?._id) return <h1>Loading...</h1>
+  if (!user?._id) return <h1>Please sign in to view your trades</h1>
 
   const handleRespond = async (id, action) => {
     const updatedTrade = await tradeOfferService.respond(id, action);
@@ -89,23 +87,7 @@ function TradeOffer({findTradeOfferToUpdate, user}) {
             <p className={styles.status}>Status: {offer.status}</p>
 
             <div className={styles.actions}>
-              <button
-                className={styles.actionBtn}
-                onClick={() => navigate(`/tradeOffer/${offer._id}`)}
-              >
-                View Details
-              </button>
-
-              <button
-                className={styles.actionBtn}
-                onClick={() => {
-                  findTradeOfferToUpdate(offer._id);
-                  navigate(`/tradeOffer/${offer._id}/update`);
-                }}
-              >
-                Update
-              </button>
-
+              
               {offer.status === 'pending' &&
                 offer.receiver_id._id === user._id && (
                   <>

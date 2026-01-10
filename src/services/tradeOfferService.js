@@ -14,31 +14,21 @@ const show = async () => {
   return response.data.tradeOffers;
 };
 
-const details = async (id) => {
-    const response = await axios.get(`${BASE_URL}/${id}`)
-    return response.data.trade
-}
 
 const create = async (tradeOffer) => {
     try {
         
-        const response = await axios.post(`${BASE_URL}`, tradeOffer)
+        const response = await axios.post(`${BASE_URL}`, tradeOffer, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`
+    }
+  })
         return response.data.trade
     } catch (error) {
         console.log(error)
     }
 }
 
-const deleteOne = async(id) => {
-    const response = await axios.delete(`${BASE_URL}/${id}`)
-    return response.data.trade
-}
-
-const update = async(tradeOffer, id) => {
-    const response = await axios.put(`${BASE_URL}/${id}`, tradeOffer)
-    console.log(response)
-    return response.data.trade
-}
 
 const respond = async (id, action) => {
   const response = await axios.put(
@@ -54,10 +44,7 @@ const respond = async (id, action) => {
 };
 
 export {
-  show,
-  details,
+  show, 
   create,
-  deleteOne,
-  update,
   respond,
 }

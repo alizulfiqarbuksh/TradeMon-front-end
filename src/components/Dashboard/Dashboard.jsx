@@ -50,7 +50,7 @@ const Dashboard = () => {
           </h1>
 
           <p className={styles.text}>
-            Welcome to your Pokémon Trading Dashboard.
+            Welcome to your Pokémon Trading HomePage.
             Here you can manage your Pokémon cards, build your personal collection,
             and trade with other trainers.
           </p>
