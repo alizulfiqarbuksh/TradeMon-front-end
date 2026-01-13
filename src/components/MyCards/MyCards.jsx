@@ -8,12 +8,14 @@ import styles from './MyCards.module.css'
 const MyCards =  ({user, findPokemonToUpdate, deletePokemon}) => {
     const [myPokemon, setMyPokemon] = useState([])
  
-    if (!user?._id) return <p>Please sign in to view your cards</p>;
-
-  const navigate = useNavigate()
-
-useEffect(() => {
-
+    
+    const navigate = useNavigate()
+    
+    useEffect(() => {
+      
+      if (!user?._id) {setMyPokemon([]) 
+        return
+      }
     const getPokemons = async () => {
       try {
 
