@@ -3,8 +3,8 @@
   display: flex;
   justify-content: center;
   padding: 60px 0;
-  background-color: #1a4d8c; /* Deep Pokémon card blue background */
-  background-image: linear-gradient(135deg, #1a4d8c 0%, #0d3b66 100%); /* Blue gradient */
+  background-color: #1a4d8c;
+  background-image: linear-gradient(135deg, #1a4d8c 0%, #0d3b66 100%);
   font-family: "Open Sans", sans-serif;
 }
 
@@ -18,18 +18,18 @@
 /* TITLE */
 .title {
   font-size: 2.6rem;
-  color: white; /* Rich red like Pokémon card titles */
+  color: #ffffff;
   margin-bottom: 10px;
   text-align: center;
-  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
-  border-bottom: 2px solid #d4af37; /* Gold underline */
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.15);
+  border-bottom: 2px solid #d4af37;
   padding-bottom: 15px;
 }
 
 /* SINGLE TRADE CARD */
 .tradeCard {
-  background: linear-gradient(135deg, #f8f3e0 0%, #fff9e6 100%); /* Parchment/card background */
-  border: 3px solid #d4af37; /* Gold border like rare card edges */
+  background: linear-gradient(135deg, #f8f3e0 0%, #fff9e6 100%);
+  border: 3px solid #d4af37;
   border-radius: 10px;
   padding: 30px;
   display: flex;
@@ -44,6 +44,13 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
+/* CANCELLED / BROKEN TRADE */
+.tradeCardCancelled {
+  opacity: 0.6;
+  filter: grayscale(20%);
+}
+
+/* POKÉMON ROW */
 .pokemonRow {
   display: flex;
   justify-content: space-between;
@@ -51,50 +58,58 @@
   position: relative;
 }
 
-/* Add a vertical divider */
+/* Divider */
 .pokemonRow::before {
   content: '';
   position: absolute;
   top: 0;
   bottom: 0;
   left: 50%;
-  width: 2px; /* thickness of the line */
-  background: linear-gradient(to bottom, #d4af37 0%, #b8941f 100%); /* Gold gradient line */
+  width: 2px;
+  background: linear-gradient(to bottom, #d4af37 0%, #b8941f 100%);
   transform: translateX(-50%);
   box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
+/* Pokémon Box */
 .pokemonBox {
   flex: 1;
   text-align: center;
-  padding: 0 20px; /* give some space from the divider */
-  background-color: rgba(56, 142, 60, 0.08); /* Very subtle green background */
-  padding: 15px;
+  padding: 15px 20px;
+  background-color: rgba(56, 142, 60, 0.08);
   border-radius: 8px;
-  border: 1px solid rgba(212, 175, 55, 0.3); /* Subtle gold border */
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .pokemonImage {
   max-width: 200px;
   border-radius: 8px;
-  margin-bottom: 15px;
-  border: 2px solid #388e3c; /* Green border around image */
+  margin: 0 auto 15px;
+  border: 2px solid #388e3c;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .pokemonText {
   margin: 8px 0;
-  color: #5d4037; /* Brownish-grey like card text */
+  color: #5d4037;
   font-size: 1.05rem;
 }
 
-.pokemonText strong {
-  color: #1a4d8c; /* Deep blue for labels */
+/* Deleted Pokémon */
+.missingText {
+  color: #b71c1c;
+  font-style: italic;
+  font-size: 0.95rem;
+  margin: auto 0;
 }
 
 /* USER INFO */
 .userText {
-  color: #388e3c; /* Grass/Pokémon green for user info */
+  color: #388e3c;
   font-weight: bold;
   margin-top: 15px;
   font-size: 1.1rem;
@@ -107,13 +122,20 @@
 /* STATUS */
 .status {
   font-size: 1.1rem;
-  color: #1a4d8c; /* Pokémon red for status */
+  color: #1a4d8c;
   text-align: center;
   font-weight: 600;
   padding: 10px;
   background-color: rgba(27, 70, 196, 0.1);
   border-radius: 6px;
   border-left: 3px solid #1a4d8c;
+}
+
+/* Cancelled status */
+.statusCancelled {
+  color: #b71c1c;
+  background-color: rgba(183, 28, 28, 0.1);
+  border-left-color: #b71c1c;
 }
 
 /* ACTION BUTTONS */
@@ -127,7 +149,7 @@
 
 .actionBtn {
   padding: 12px 24px;
-  background: linear-gradient(to bottom, #1a4d8c 0%, #0d3b66 100%); /* Deep blue gradient */
+  background: linear-gradient(to bottom, #1a4d8c 0%, #0d3b66 100%);
   border: none;
   border-radius: 6px;
   color: #ffffff;
@@ -151,28 +173,20 @@
   box-shadow: 0 2px 0 #0a2a4d;
 }
 
-/* Secondary button style for different actions */
-.actionBtn.delete {
-  background: linear-gradient(to bottom, #c62828 0%, #b71c1c 100%);
-  box-shadow: 0 4px 0 #7f0000;
+.actionBtn:disabled {
+  background: #999;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
-.actionBtn.delete:hover {
-  background: linear-gradient(to bottom, #d32f2f 0%, #c62828 100%);
-  box-shadow: 0 6px 0 #7f0000;
-}
-
-.actionBtn.delete:active {
-  box-shadow: 0 2px 0 #7f0000;
-}
-
-/* EMPTY */
+/* EMPTY STATE */
 .emptyText {
-  color: #5d4037; /* Brownish-grey like card text */
+  color: #5d4037;
   font-size: 1.2rem;
   text-align: center;
   padding: 30px;
-  background-color: rgba(248, 243, 224, 0.8); /* Parchment background */
+  background-color: rgba(248, 243, 224, 0.8);
   border-radius: 10px;
-  border: 2px dashed #d4af37; /* Gold dashed border */
+  border: 2px dashed #d4af37;
 }
