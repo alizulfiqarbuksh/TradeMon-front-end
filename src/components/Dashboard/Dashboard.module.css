@@ -1,9 +1,8 @@
 .page {
-  height: 88vh; /* EXACT navbar height */
+  height: 88vh; /* match navbar height */
   width: 100%;
-  background-color: #1a4d8c; /* Deep Pokémon card blue background */
-  overflow: hidden; /* PREVENT vertical scroll */
   font-family: "Open Sans", sans-serif;
+  overflow: hidden;
 }
 
 .main {
@@ -15,48 +14,51 @@
 /* LEFT IMAGE */
 .image {
   flex: 7;
-  background-image: url("/img/dashboard-bg.png"); /* your image */
+  background-image: url("https://i.imgur.com/dh6pBkc.png"); /* uploaded image */
   background-size: cover;
   background-position: center;
-  filter: brightness(0.7) saturate(1.1); /* Enhance to match theme */
+  filter: brightness(0.7) saturate(1.1);
 }
 
 /* RIGHT CONTENT */
 .content {
   flex: 3;
   padding: 60px;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  background: linear-gradient(135deg, rgba(248, 243, 224, 0.95) 0%, rgba(255, 249, 230, 0.95) 100%); /* Parchment/card background with transparency */
+  background: linear-gradient(
+    135deg,
+    rgba(248, 243, 224, 0.95) 0%,
+    rgba(255, 249, 230, 0.95) 100%
+  );
   backdrop-filter: blur(5px);
-  color: #2c3e50; /* Deep blue-grey text */
-  border-left: 3px solid #d4af37; /* Gold border like rare card edges */
+  color: #2c3e50;
+  border-left: 3px solid #d4af37;
   box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Title */
 .title {
   font-size: 2.5rem;
-  color: #c62828; /* Rich red like Pokémon card titles */
+  color: #c62828;
   margin-bottom: 20px;
-  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 /* Text */
 .text {
   font-size: 1.15rem;
   line-height: 1.7;
-  color: #5d4037; /* Brownish-grey like card text */
+  color: #5d4037;
   margin-bottom: 20px;
 }
 
+/* Message */
 .message {
   margin-top: 20px;
   font-weight: bold;
-  color: #388e3c; /* Grass/Pokémon green for messages */
+  color: #388e3c;
   padding: 10px 15px;
   background-color: rgba(56, 142, 60, 0.1);
   border-radius: 6px;

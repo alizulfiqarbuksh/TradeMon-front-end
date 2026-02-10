@@ -15,6 +15,14 @@ const NavBar = () => {
 
   return (
     <nav className={styles.nav}>
+      <div className={styles.logo}>
+    <img
+      src="/trademon-icon.png"
+      alt="TradeMon Logo"
+      className={styles.logoImage}
+    />
+    <span className={styles.title}>TradeMon</span>
+  </div>
       {user ? (
         <ul className={styles.list}>
           <li><Link className={styles.link} to="/">Home</Link></li>
